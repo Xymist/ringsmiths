@@ -194,7 +194,7 @@ const setHiddenOptions = () => {
   excluded = [...excluded];
 
   // Get the names of all the option fields
-  const available_fields = Object.keys(fields)
+  const available_fields = Object.keys(fields);
 
   // Hide anything to exclude, reveal anything otherwise
   available_fields.forEach((field_id) => {
@@ -215,7 +215,7 @@ const setHiddenOptions = () => {
     if (section) {
       section.hidden = (excluded_pfx[pfx] === field_pfx[pfx]);
     }
-  })
+  });
 };
 
 const updateUrlData = (elem) => {
@@ -250,9 +250,33 @@ const updateUrlData = (elem) => {
 
   setHiddenOptions();
   assembleUrl();
+  setFinaliseUrl();
 };
 
-// Initially, the URL should be the default product.
+const validUrl = () => {
+  Object.keys(selections).forEach((key) => {
+    let associated_section = document.getElementById(key + '-option-section');
+    // If the key is null but the section is not hidden,
+    // we're missing an attribute
+    if (!selections[key] && associated_section && !associated_section.hidden) {
+      return false
+    };
+  });
+
+  return true
+};
+
+const setFinaliseUrl = () => {
+  let btn = document.getElementById('finalise_ring');
+
+  if (validUrl()) {
+    btn.href = "/" + url;
+  } else {
+    btn.href = "#";
+  };
+};
+
+// Initially, the URL is invalid and so we just link to '#'.
 let url;
 setHiddenOptions();
 assembleUrl();
