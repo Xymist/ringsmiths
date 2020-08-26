@@ -156,7 +156,8 @@ let selections = {
   style: null,
 };
 
-const field_pfx = fields.map((ex) => { ex.split("-")[0] }).reduce((tally, field_id) => {
+const field_pfx = Object.keys(fields).reduce((tally, field_name) => {
+  let field_id = field_name.split("-")[0];
   tally[field_id] = (tally[field_id] || 0) + 1;
   return tally;
 }, {});
@@ -203,14 +204,17 @@ const setHiddenOptions = () => {
     };
   });
 
-  const excluded_pfx = excluded.map((ex) => { ex.split("-")[0] }).reduce((tally, field_id) => {
+  const excluded_pfx = excluded.reduce((tally, field_name) => {
+    let field_id = field_name.split("-")[0];
     tally[field_id] = (tally[field_id] || 0) + 1;
     return tally;
   }, {});
 
   Object.keys(selections).forEach((pfx) => {
     let section = document.getElementById(pfx + '-option-section');
-    section.hidden = (excluded_pfx[pfx] === field_pfx[pfx]);
+    if (section) {
+      section.hidden = (excluded_pfx[pfx] === field_pfx[pfx]);
+    }
   })
 };
 
