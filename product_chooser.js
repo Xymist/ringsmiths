@@ -1,4 +1,4 @@
-let fields = {
+const fields = {
   "ring-plain": {
     field: "ring_type",
     value: "plain-shaped"
@@ -192,7 +192,7 @@ const updateUrlData = (elem) => {
   elem_details = fields[elem.id]
 
   // Fetch the field to update and the value to set it to
-  let affected_field = elem_details["field"];
+  const affected_field = elem_details["field"];
 
   // Set attributes of selections object
   selections[affected_field] = elem.id
