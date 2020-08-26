@@ -254,16 +254,18 @@ const updateUrlData = (elem) => {
 };
 
 const validUrl = () => {
+  let res = true;
+
   Object.keys(selections).forEach((key) => {
     let associated_section = document.getElementById(key + '-option-section');
     // If the key is null but the section is not hidden,
     // we're missing an attribute
     if (!selections[key] && associated_section && !associated_section.hidden) {
-      return false
+      res = false
     };
   });
 
-  return true
+  res
 };
 
 const setFinaliseUrl = () => {
