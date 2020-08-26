@@ -1,6 +1,5 @@
 let fields = {
   "ring-plain": {
-    selected: true,
     field: "ring_type",
     value: "plain-shaped"
   },
@@ -9,7 +8,6 @@ let fields = {
     value: "gem-set"
   },
   "carat-9": {
-    selected: true,
     field: "carat",
     value: "9ct",
     excl_attrs: {
@@ -39,7 +37,6 @@ let fields = {
     value: "easy-fit",
   },
   "style-court": {
-    selected: true,
     field: "style",
     value: "court",
   },
@@ -48,7 +45,6 @@ let fields = {
     value: "d-shape",
   },
   "width-2": {
-    selected: true,
     field: "size_width",
     value: "2mm",
     excl_attrs: {
@@ -108,7 +104,6 @@ let fields = {
     ]
   },
   "metal-yellowgold": {
-    selected: true,
     field: "metal",
     value: "yellow-gold"
   },
