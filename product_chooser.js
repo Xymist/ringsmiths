@@ -265,7 +265,7 @@ const validUrl = () => {
     };
   });
 
-  res
+  return res
 };
 
 const setFinaliseUrl = () => {
