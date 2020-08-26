@@ -160,10 +160,10 @@ const assembleUrl = () => {
   // Fetch the pieces we want from the selections object; anything we don't want
   // will be null or undefined, and will be removed by the filter
   let arr = [
-    fields[selections.carat].value,
-    fields[selections.size_width].value,
-    fields[selections.metal].value,
-    fields[selections.style].value,
+    fields[selections.carat]?.value,
+    fields[selections.size_width]?.value,
+    fields[selections.metal]?.value,
+    fields[selections.style]?.value,
     "wedding-ring",
   ].filter(Boolean)
 
@@ -172,18 +172,27 @@ const assembleUrl = () => {
 };
 
 const setHiddenOptions = () => {
-  let selected = [selections.carat, selections.size_width, selections.style, selections.metal];
+  let selected = [
+    selections.carat,
+    selections.size_width,
+    selections.style,
+    selections.metal
+  ].filter(Boolean);
   let excluded = []
 
   // Push all excluded element ID sets
-  selected.forEach((entry) => { excluded.push(fields[entry][excl_fields]) })
+  selected.forEach((entry) => { excluded.push(fields[entry]["excl_fields"]) })
+
   // Deduplicate
-  excluded = new Set(excluded.flat());
+  excluded = new Set(excluded.flat().filter(Boolean));
   excluded = [...excluded];
 
   // Hide anything to exclude, reveal anything otherwise
   Object.keys(fields).forEach((field_id) => {
-    document.getElementById(field_id).hidden = excluded.includes(field_id)
+    let elem = document.getElementById(field_id);
+    if (elem) {
+      elem.hidden = excluded.includes(field_id);
+    };
   });
 }
 
@@ -200,7 +209,7 @@ const updateUrlData = (elem) => {
   // Erase attributes that are impossible (e.g. carat)
   if (elem_details.excl_attrs !== undefined) {
     ["ring_type", "carat", "size_width", "metal", "style", "product_type"].forEach((attrib) => {
-      excl = elem_details.excl_fields[attrib]
+      excl = elem_details.excl_fields
 
       // If there are excl_attrs for this attribute, and the current selection for this attribute
       // is in those excl_attrs, null that selection so it won't be included in the URL
@@ -218,6 +227,8 @@ const updateUrlData = (elem) => {
 let url;
 assembleUrl();
 
-document.getElementsByClassName('ring-attribute-selector').forEach((selector) => {
-  selector.onclick = updateUrlData(selector);
+document.addEventListener("DOMContentLoaded", function () {
+  [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
+    selector.onclick = () => updateUrlData(selector);
+  });
 });
