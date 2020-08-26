@@ -45,7 +45,7 @@ const fields = {
     value: "d-shape",
   },
   "width-2": {
-    field: "size_width",
+    field: "width",
     value: "2mm",
     excl_attrs: {
       "metal": ["titanium"]
@@ -55,7 +55,7 @@ const fields = {
     ]
   },
   "width-2.5": {
-    field: "size_width",
+    field: "width",
     value: "2-5mm",
     excl_attrs: {
       "metal": ["rose-gold", "titanium"]
@@ -66,7 +66,7 @@ const fields = {
     ]
   },
   "width-3": {
-    field: "size_width",
+    field: "width",
     value: "3mm",
     excl_attrs: {
       "metal": ["titanium"]
@@ -76,15 +76,15 @@ const fields = {
     ]
   },
   "width-4": {
-    field: "size_width",
+    field: "width",
     value: "4mm",
   },
   "width-5": {
-    field: "size_width",
+    field: "width",
     value: "5mm",
   },
   "width-6": {
-    field: "size_width",
+    field: "width",
     value: "6mm",
     excl_attrs: {
       "metal": ["rose-gold"]
@@ -94,7 +94,7 @@ const fields = {
     ]
   },
   "width-8": {
-    field: "size_width",
+    field: "width",
     value: "8mm",
     excl_attrs: {
       "metal": ["rose-gold"]
@@ -111,7 +111,7 @@ const fields = {
     field: "metal",
     value: "rose-gold",
     excl_attrs: {
-      "size_width": ["6mm", "8mm", "2.5mm"]
+      "width": ["6mm", "8mm", "2.5mm"]
     },
     excl_fields: [
       "width-6",
@@ -137,7 +137,7 @@ const fields = {
     field: "metal",
     value: "titanium",
     excl_attrs: {
-      "size_width": ["2mm", "2.5mm", "3mm"],
+      "width": ["2mm", "2.5mm", "3mm"],
       "carat": ["9ct", "18ct"]
     },
     excl_fields: [
@@ -150,18 +150,23 @@ const fields = {
 // the user has made
 let selections = {
   ring_type: "ring-plain",
-  carat: "carat-9",
-  size_width: "width-2",
-  metal: "metal-yellowgold",
-  style: "style-court",
+  carat: null,
+  width: null,
+  metal: null,
+  style: null,
 };
+
+const field_pfx = fields.map((ex) => { ex.split("-")[0] }).reduce((tally, field_id) => {
+  tally[field_id] = (tally[field_id] || 0) + 1;
+  return tally;
+}, {});
 
 const assembleUrl = () => {
   // Fetch the pieces we want from the selections object; anything we don't want
   // will be null or undefined, and will be removed by the filter
   let arr = [
     fields[selections.carat]?.value,
-    fields[selections.size_width]?.value,
+    fields[selections.width]?.value,
     fields[selections.metal]?.value,
     fields[selections.style]?.value,
     "wedding-ring",
@@ -174,7 +179,7 @@ const assembleUrl = () => {
 const setHiddenOptions = () => {
   let selected = [
     selections.carat,
-    selections.size_width,
+    selections.width,
     selections.style,
     selections.metal
   ].filter(Boolean);
@@ -187,14 +192,27 @@ const setHiddenOptions = () => {
   excluded = new Set(excluded.flat().filter(Boolean));
   excluded = [...excluded];
 
+  // Get the names of all the option fields
+  const available_fields = Object.keys(fields)
+
   // Hide anything to exclude, reveal anything otherwise
-  Object.keys(fields).forEach((field_id) => {
+  available_fields.forEach((field_id) => {
     let elem = document.getElementById(field_id);
     if (elem) {
       elem.hidden = excluded.includes(field_id);
     };
   });
-}
+
+  const excluded_pfx = excluded.map((ex) => { ex.split("-")[0] }).reduce((tally, field_id) => {
+    tally[field_id] = (tally[field_id] || 0) + 1;
+    return tally;
+  }, {});
+
+  Object.keys(selections).forEach((pfx) => {
+    let section = document.getElementById(pfx + '-option-section');
+    section.hidden = (excluded_pfx[pfx] === field_pfx[pfx]);
+  })
+};
 
 const updateUrlData = (elem) => {
   // Find the appropriate content in the appropriate map for this element
@@ -204,20 +222,27 @@ const updateUrlData = (elem) => {
   const affected_field = elem_details["field"];
 
   // Set attributes of selections object
-  selections[affected_field] = elem.id
+  if (selections[affected_field] === elem.id) {
+    selections[affected_field] = null;
 
-  // Erase attributes that are impossible (e.g. carat)
-  if (elem_details.excl_attrs !== undefined) {
-    ["ring_type", "carat", "size_width", "metal", "style", "product_type"].forEach((attrib) => {
-      excl = elem_details.excl_fields
+    // We don't need to un-null any other fields, since by deselecting an element
+    // we're always increasing the options available.
+  } else {
+    selections[affected_field] = elem.id;
 
-      // If there are excl_attrs for this attribute, and the current selection for this attribute
-      // is in those excl_attrs, null that selection so it won't be included in the URL
-      if (excl !== undefined && excl.includes(selections[attrib])) {
-        selections[attrib] = null
-      }
-    });
-  }
+    // Erase attributes that are impossible (e.g. carat)
+    if (elem_details.excl_attrs !== undefined) {
+      Object.keys(selections).forEach((attrib) => {
+        excl = elem_details.excl_fields
+
+        // If there are excl_attrs for this attribute, and the current selection for this attribute
+        // is in those excl_attrs, null that selection so it won't be included in the URL
+        if (excl !== undefined && excl.includes(selections[attrib])) {
+          selections[attrib] = null
+        }
+      });
+    }
+  };
 
   setHiddenOptions();
   assembleUrl();
@@ -225,6 +250,7 @@ const updateUrlData = (elem) => {
 
 // Initially, the URL should be the default product.
 let url;
+setHiddenOptions();
 assembleUrl();
 
 document.addEventListener("DOMContentLoaded", function () {
