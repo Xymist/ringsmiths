@@ -40,7 +40,7 @@ const fields = {
     field: "style",
     value: "court",
   },
-  "style-d": {
+  "style-dshape": {
     field: "style",
     value: "d-shape",
   },
@@ -293,9 +293,9 @@ const getImageSrc = (elem) => {
   // Use the image which considers the rest of the current selection,
   // with the value which this option would set overridden.
   let selected = [
-    affected_field === "style" ? elem.value : (fields[selections.style]?.value || "court"),
-    affected_field === "metal" ? elem.value : (fields[selections.metal]?.value || "yellow-gold"),
-    affected_field === "width" ? elem.value : (fields[selections.width]?.value || "4mm")
+    affected_field === "style" ? elem_details.value : (fields[selections.style]?.value || "court"),
+    affected_field === "metal" ? elem_details.value : (fields[selections.metal]?.value || "yellow-gold"),
+    affected_field === "width" ? elem_details.value : (fields[selections.width]?.value || "4mm")
   ];
 
   let key = selected.join("-");
