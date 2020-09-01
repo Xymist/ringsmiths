@@ -146,127 +146,6 @@ const fields = {
   }
 };
 
-// width-style-metal => random bullshit URL because we can't
-// be bothered to reupload and standardise
-const image_srcs = {
-  "court-platinum-2-5mm": "2020/08/PWR-S25M-FS_0.jpg",
-  "court-platinum-2mm": "2020/04/PWR-S20M-CT_0-2.jpg",
-  "court-platinum-3mm": "2020/07/RS-MC-W3-0-3.jpg",
-  "court-platinum-4mm": "2020/07/RS-MC-W4-0-3.jpg",
-  "court-platinum-5mm": "2020/07/RS-MC-W5-0-3.jpg",
-  "court-platinum-6mm": "2020/07/RS-MC-W6-0-3.jpg",
-  "court-platinum-8mm": "2020/07/RS-MC-W8-0-3.jpg",
-  "court-rose-gold-2mm": "2020/05/PWR-R20M-CT_0-6.jpg",
-  "court-rose-gold-3mm": "2020/07/RS-MC-R3-0-1.jpg",
-  "court-rose-gold-4mm": "2020/07/RS-MC-R4-0-1.jpg",
-  "court-rose-gold-5mm": "2020/07/RS-MC-R5-0-1.jpg",
-  "court-titanium-4mm": "2020/06/T-LR652-4x1.6mm-1-2.jpg",
-  "court-titanium-5mm": "2020/06/T-LR1405-2.jpg",
-  "court-titanium-6mm": "2020/06/T-LR656-6x1.9mm-1-2.jpg",
-  "court-titanium-8mm": "2020/06/T-LR660-8x2.3mm-1-2.jpg",
-  "court-white-gold-2-5mm": "2020/08/PWR-S25M-FS_0.jpg",
-  "court-white-gold-2mm": "2020/02/PWR-S20M-CT_0.jpg",
-  "court-white-gold-3mm": "2020/07/RS-MC-W3-0-1.jpg",
-  "court-white-gold-4mm": "2020/07/RS-MC-W4-0-3.jpg",
-  "court-white-gold-5mm": "2020/07/RS-MC-W5-0-3.jpg",
-  "court-white-gold-6mm": "2020/07/RS-MC-W6-0-3.jpg",
-  "court-white-gold-8mm": "2020/07/RS-MC-W8-0-3.jpg",
-  "court-yellow-gold-2-5mm": "2020/02/PWR-G25M-CT_0.jpg",
-  "court-yellow-gold-2mm": "2020/02/PWR-G25M-CT_0.jpg",
-  "court-yellow-gold-3mm": "2020/07/RS-MC-Y3-0-2.jpg",
-  "court-yellow-gold-4mm": "2020/07/RS-MC-Y4-0-1.jpg",
-  "court-yellow-gold-5mm": "2020/07/RS-MC-Y5-0-1.jpg",
-  "court-yellow-gold-6mm": "2020/07/RS-MC-Y6-0-1.jpg",
-  "court-yellow-gold-8mm": "2020/07/RS-MC-Y8-0-1.jpg",
-  "d-shape-platinum-2-5mm": "2020/08/PWR-S25M-DS_0.jpg",
-  "d-shape-platinum-2mm": "2020/04/PWR-S20M-DS_0-2.jpg",
-  "d-shape-platinum-3mm": "2020/04/PWR-S3M-DS_0-1.jpg",
-  "d-shape-platinum-4mm": "2020/04/PWR-S4M-DS_0-1.jpg",
-  "d-shape-platinum-5mm": "2020/04/PWR-S5M-DS_0-1.jpg",
-  "d-shape-platinum-6mm": "2020/04/PWR-S6M-DS_0-1.jpg",
-  "d-shape-platinum-8mm": "2020/04/PWR-S8M-DS_0-1.jpg",
-  "d-shape-rose-gold-2mm": "2020/05/PWR-R20M-DS_0-1.jpg",
-  "d-shape-rose-gold-3mm": "2020/02/PWR-R4M-DS_0.jpg",
-  "d-shape-rose-gold-4mm": "2020/02/PWR-R4M-DS_0.jpg",
-  "d-shape-rose-gold-5mm": "2020/05/PWR-R5M-DS_0-5.jpg",
-  "d-shape-titanium-4mm": "2020/06/T-LR650-4x1.6mm-2-2.jpg",
-  "d-shape-titanium-5mm": "2020/06/T-LR1407-2.jpg",
-  "d-shape-titanium-6mm": "2020/06/T-LR654-6x1.9mm-1-2.jpg",
-  "d-shape-titanium-8mm": "2020/06/T-LR658-8x2.3mm-1-2.jpg",
-  "d-shape-white-gold-2-5mm": "2020/08/PWR-S25M-DS_0.jpg",
-  "d-shape-white-gold-2mm": "2020/04/PWR-S20M-DS_0-2.jpg",
-  "d-shape-white-gold-3mm": "2020/04/PWR-S3M-DS_0-1.jpg",
-  "d-shape-white-gold-4mm": "2020/04/PWR-S4M-DS_0-1.jpg",
-  "d-shape-white-gold-5mm": "2020/04/PWR-S5M-DS_0-1.jpg",
-  "d-shape-white-gold-6mm": "2020/04/PWR-S6M-DS_0-1.jpg",
-  "d-shape-white-gold-8mm": "2020/04/PWR-S8M-DS_0-1.jpg",
-  "d-shape-yellow-gold-2-5mm": "2020/02/PWR-G20M-DS_0.jpg",
-  "d-shape-yellow-gold-2mm": "2020/02/PWR-G20M-DS_0.jpg",
-  "d-shape-yellow-gold-3mm": "2020/02/PWR-G3M-DS_0.jpg",
-  "d-shape-yellow-gold-4mm": "2020/02/PWR-G4M-DS_0.jpg",
-  "d-shape-yellow-gold-5mm": "2020/02/PWR-G5M-DS_0.jpg",
-  "d-shape-yellow-gold-6mm": "2020/02/PWR-G6M-DS_0.jpg",
-  "d-shape-yellow-gold-8mm": "2020/02/PWR-G8M-DS_0.jpg",
-  "easy-fit-platinum-2-5mm": "2020/04/PWR-S20M-FC_0.jpg",
-  "easy-fit-platinum-2mm": "2020/04/PWR-S20M-FC_0.jpg",
-  "easy-fit-platinum-3mm": "2020/04/PWR-S3M-FC_0.jpg",
-  "easy-fit-platinum-4mm": "2020/04/PWR-S4M-FC_0.jpg",
-  "easy-fit-platinum-5mm": "2020/04/PWR-S5M-FC_0.jpg",
-  "easy-fit-platinum-6mm": "2020/04/PWR-S6M-FC_0.jpg",
-  "easy-fit-platinum-8mm": "2020/04/PWR-S8M-FC_0.jpg",
-  "easy-fit-rose-gold-2mm": "2020/05/PWR-R20M-FC_0-6.jpg",
-  "easy-fit-rose-gold-3mm": "2020/05/PWR-R3M-FC_0-5.jpg",
-  "easy-fit-rose-gold-4mm": "2020/05/PWR-R4M-FC_0-5.jpg",
-  "easy-fit-rose-gold-5mm": "2020/05/PWR-R5M-FC_0-5.jpg",
-  "easy-fit-titanium-4mm": "2020/06/T-LR653-4x1.6mm-1-2.jpg",
-  "easy-fit-titanium-5mm": "2020/06/T-LR1409-2.jpg",
-  "easy-fit-titanium-6mm": "2020/06/T-LR657-6x1.9mm-1-2.jpg",
-  "easy-fit-titanium-8mm": "2020/06/T-LR661-8x2.3mm-1-2.jpg",
-  "easy-fit-white-gold-2-5mm": "2020/04/PWR-S20M-FC_0.jpg",
-  "easy-fit-white-gold-2mm": "2020/04/PWR-S20M-FC_0.jpg",
-  "easy-fit-white-gold-3mm": "2020/04/PWR-S3M-FC_0.jpg",
-  "easy-fit-white-gold-4mm": "2020/04/PWR-S4M-FC_0.jpg",
-  "easy-fit-white-gold-5mm": "2020/04/PWR-S5M-FC_0.jpg",
-  "easy-fit-white-gold-6mm": "2020/04/PWR-S6M-FC_0.jpg",
-  "easy-fit-white-gold-8mm": "2020/04/PWR-S8M-FC_0.jpg",
-  "easy-fit-yellow-gold-2-5mm": "2020/02/PWR-G20M-FC_0.jpg",
-  "easy-fit-yellow-gold-2mm": "2020/02/PWR-G20M-FC_0.jpg",
-  "easy-fit-yellow-gold-3mm": "2020/02/PWR-G3M-FC_0.jpg",
-  "easy-fit-yellow-gold-4mm": "2020/02/PWR-G4M-FC_0.jpg",
-  "easy-fit-yellow-gold-5mm": "2020/02/PWR-G5M-FC_0.jpg",
-  "easy-fit-yellow-gold-6mm": "2020/02/PWR-G6M-FC_0.jpg",
-  "easy-fit-yellow-gold-8mm": "2020/02/PWR-G8M-FC_0.jpg",
-  "flat-platinum-2-5mm": "2020/04/PWR-S20M-FT_0.jpg",
-  "flat-platinum-2mm": "2020/04/PWR-S20M-FT_0.jpg",
-  "flat-platinum-3mm": "2020/04/PWR-S3M-FT_0.jpg",
-  "flat-platinum-4mm": "2020/04/PWR-S4M-FT_0.jpg",
-  "flat-platinum-5mm": "2020/04/PWR-S5M-FT_0.jpg",
-  "flat-platinum-6mm": "2020/04/PWR-S6M-FT_0.jpg",
-  "flat-platinum-8mm": "2020/04/PWR-S8M-FT_0.jpg",
-  "flat-rose-gold-2mm": "2020/05/PWR-R25M-FT_0-1-1.jpg",
-  "flat-rose-gold-3mm": "2020/05/PWR-R3M-FT_0-5.jpg",
-  "flat-rose-gold-4mm": "2020/05/PWR-R4M-FT_0-5.jpg",
-  "flat-rose-gold-5mm": "2020/05/PWR-R5M-FT_0-6.jpg",
-  "flat-titanium-4mm": "2020/06/T-LR651-4x1.6mm-1-1.jpg",
-  "flat-titanium-5mm": "2020/06/T-LR1403-1.jpg",
-  "flat-titanium-6mm": "2020/06/T-LR655-6x1.9mm-1-1.jpg",
-  "flat-titanium-8mm": "2020/06/T-LR659-8x2.3mm-1-1.jpg",
-  "flat-white-gold-2-5mm": "2020/04/PWR-S20M-FT_0.jpg",
-  "flat-white-gold-2mm": "2020/04/PWR-S20M-FT_0.jpg",
-  "flat-white-gold-3mm": "2020/04/PWR-S3M-FT_0.jpg",
-  "flat-white-gold-4mm": "2020/04/PWR-S4M-FT_0.jpg",
-  "flat-white-gold-5mm": "2020/04/PWR-S5M-FT_0.jpg",
-  "flat-white-gold-6mm": "2020/04/PWR-S6M-FT_0.jpg",
-  "flat-white-gold-8mm": "2020/04/PWR-S8M-FT_0.jpg",
-  "flat-yellow-gold-2-5mm": "2020/02/PWR-G20M-FT_0.jpg",
-  "flat-yellow-gold-2mm": "2020/02/PWR-G20M-FT_0.jpg",
-  "flat-yellow-gold-3mm": "2020/02/PWR-G3M-FT_0.jpg",
-  "flat-yellow-gold-4mm": "2020/02/PWR-G4M-FT_0.jpg",
-  "flat-yellow-gold-5mm": "2020/02/PWR-G5M-FT_0.jpg",
-  "flat-yellow-gold-6mm": "2020/02/PWR-G6M-FT_0.jpg",
-  "flat-yellow-gold-8mm": "2020/02/PWR-G8M-FT_0.jpg",
-}
-
 // Object representing the current state of selections
 // the user has made
 let selections = {
@@ -417,7 +296,7 @@ const getImageSrc = (elem) => {
 
   let key = selected.join("-");
 
-  return "/uploads/" + image_srcs[key]
+  return "/uploads/2020/08/" + key + ".jpg"
 };
 
 // For a given element, fetch its child image and update the src attribute
@@ -441,6 +320,24 @@ const updateImages = () => {
   })
 };
 
+const skipToNextSection = (event) => {
+  // Do nothing if no selection has been made
+  if ([null, undefined].includes(selections[event.target.id.split("-")[0]])) {
+    return
+  };
+
+  // Hide this section.
+  const current_section = event.target.closest(".et_pb_section")
+  current_section.style.display = "none";
+
+  // Open the next valid (i.e. not hidden) section.
+  next_section = current_section.nextElementSibling
+  while (next_section.hidden) {
+    next_section = next_section.nextElementSibling
+  };
+  next_section.style.display = "block";
+}
+
 // Initially, the URL is invalid and so we just link to '#'.
 let url = '#';
 
@@ -452,6 +349,16 @@ document.addEventListener("DOMContentLoaded", function () {
       updateImages();
     }
   });
+
+  [...document.getElementsByClassName('next-button')].forEach((btn) => {
+    btn.onclick = (event) => {
+      // Avoid page refresh
+      event.preventDefault();
+
+      skipToNextSection(event);
+    };
+  });
+
   setHiddenOptions();
   assembleUrl();
 });
