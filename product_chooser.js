@@ -250,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
     selector.onclick = () => {
       updateUrlData(selector);
       updateImages();
+      updateSpec();
     }
   });
 
