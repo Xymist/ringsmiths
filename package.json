@@ -1,0 +1,21 @@
+{
+  "name": "ringsmiths",
+  "version": "1.0.0",
+  "description": "",
+  "main": "product_chooser.js",
+  "scripts": {
+    "dev": "parcel product_chooser.js",
+    "build": "parcel build product_chooser.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xymist/ringsmiths.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xymist/ringsmiths/issues"
+  },
+  "homepage": "https://github.com/Xymist/ringsmiths#readme"
+}
