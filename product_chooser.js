@@ -40,7 +40,7 @@ const fields = {
     field: "style",
     value: "court",
   },
-  "style-d": {
+  "style-dshape": {
     field: "style",
     value: "d-shape",
   },
@@ -220,7 +220,7 @@ const setHiddenOptions = () => {
 
 const updateUrlData = (elem) => {
   // Find the appropriate content in the appropriate map for this element
-  elem_details = fields[elem.id]
+  const elem_details = fields[elem.id]
 
   // Fetch the field to update and the value to set it to
   const affected_field = elem_details["field"];
@@ -268,23 +268,116 @@ const validUrl = () => {
   return res
 };
 
+// The "finalise" button takes the user to the relevant product page
 const setFinaliseUrl = () => {
   let btn = document.getElementById('finalise_ring');
 
   if (validUrl()) {
-    btn.href = "/" + url;
+    btn.href = "/product/" + url;
   } else {
     btn.href = "#";
   };
 };
 
-// Initially, the URL is invalid and so we just link to '#'.
-let url;
-setHiddenOptions();
-assembleUrl();
+const getImageSrc = (elem) => {
+  // Find the appropriate content in the appropriate map for this element
+  const elem_details = fields[elem.id];
 
+  if (elem_details === undefined) {
+    return
+  }
+
+  // Fetch the field to update and the value to set it to
+  const affected_field = elem_details["field"];
+
+  // Use the image which considers the rest of the current selection,
+  // with the value which this option would set overridden.
+  let selected = [
+    affected_field === "style" ? elem_details.value : (fields[selections.style]?.value || "court"),
+    affected_field === "metal" ? elem_details.value : (fields[selections.metal]?.value || "yellow-gold"),
+    affected_field === "width" ? elem_details.value : (fields[selections.width]?.value || "4mm")
+  ];
+
+  let key = selected.join("-");
+
+  return "/wp-content/uploads/2020/08/" + key + ".jpg"
+};
+
+// For a given element, fetch its child image and update the src attribute
+const updateImageSrc = (elem) => {
+  const elem_image = document.getElementById(elem.id + "-image");
+  const img_src = getImageSrc(elem);
+
+  // Some things, such as the carat, don't have mutable images.
+  // For those, img_src will be blank, so the relevant image
+  // will not be updated.
+  if (elem_image && img_src) {
+    elem_image.src = img_src;
+    elem_image.srcset = "";
+  }
+}
+
+// Get all attribute selectors, find their images and update
+// them to use the latest selections or defaults.
+const updateImages = () => {
+  [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
+    updateImageSrc(selector);
+  })
+};
+
+const skipToNextSection = (event) => {
+  // Do nothing if no selection has been made
+  if ([null, undefined].includes(selections[event.target.id.split("-")[0]])) {
+    return
+  };
+
+  // Hide this section.
+  const current_section = event.target.closest(".et_pb_section")
+  current_section.style.display = "none";
+
+  // Open the next valid (i.e. not hidden) section.
+  next_section = current_section.nextElementSibling
+  while (next_section.hidden) {
+    next_section = next_section.nextElementSibling
+  };
+  next_section.style.display = "block";
+}
+
+const initialHide = () => {
+  Object.keys(selections).forEach((pfx) => {
+    if (pfx === "metal") {
+      return
+    };
+
+    let section = document.getElementById(pfx + '-option-section');
+    if (section) {
+      section.style.display = "none";
+    }
+  });
+}
+
+// Initially, the URL is invalid and so we just link to '#'.
+let url = '#';
+
+// Entrypoint for the product chooser logic
 document.addEventListener("DOMContentLoaded", function () {
   [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
-    selector.onclick = () => updateUrlData(selector);
+    selector.onclick = () => {
+      updateUrlData(selector);
+      updateImages();
+    }
   });
+
+  [...document.getElementsByClassName('next-button')].forEach((btn) => {
+    btn.onclick = (event) => {
+      // Avoid page refresh
+      event.preventDefault();
+
+      skipToNextSection(event);
+    };
+  });
+
+  initialHide();
+  setHiddenOptions();
+  assembleUrl();
 });
