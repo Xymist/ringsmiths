@@ -420,6 +420,7 @@ const getImageSrc = (elem) => {
   return "/uploads/" + image_srcs[key]
 };
 
+// For a given element, fetch its child image and update the src attribute
 const updateImageSrc = (elem) => {
   const elem_image = document.getElementById(elem.id + "-image");
   const img_src = getImageSrc(elem);
@@ -432,6 +433,14 @@ const updateImageSrc = (elem) => {
   }
 }
 
+// Get all attribute selectors, find their images and update
+// them to use the latest selections or defaults.
+const updateImages = () => {
+  [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
+    updateImageSrc(selector);
+  })
+};
+
 // Initially, the URL is invalid and so we just link to '#'.
 let url = '#';
 
@@ -440,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
   [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
     selector.onclick = () => {
       updateUrlData(selector);
-      updateImageSrc(selector);
+      updateImages();
     }
   });
   setHiddenOptions();
