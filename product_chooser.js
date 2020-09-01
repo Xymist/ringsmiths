@@ -283,6 +283,10 @@ const getImageSrc = (elem) => {
   // Find the appropriate content in the appropriate map for this element
   const elem_details = fields[elem.id];
 
+  if (elem_details === undefined) {
+    return
+  }
+
   // Fetch the field to update and the value to set it to
   const affected_field = elem_details["field"];
 
@@ -338,6 +342,19 @@ const skipToNextSection = (event) => {
   next_section.style.display = "block";
 }
 
+const initialHide = () => {
+  Object.keys(selections).forEach((pfx) => {
+    if (pfx === "metal") {
+      return
+    };
+
+    let section = document.getElementById(pfx + '-option-section');
+    if (section) {
+      section.style.display = "none";
+    }
+  });
+}
+
 // Initially, the URL is invalid and so we just link to '#'.
 let url = '#';
 
@@ -359,6 +376,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   });
 
+  initialHide();
   setHiddenOptions();
   assembleUrl();
 });
