@@ -91,7 +91,7 @@ const updateUrlData = (elem) => {
     // Erase attributes that are impossible (e.g. carat)
     if (elem_details.excl_attrs !== undefined) {
       Object.keys(selections).forEach((attrib) => {
-        excl = elem_details.excl_fields
+        const excl = elem_details.excl_fields
 
         // If there are excl_attrs for this attribute, and the current selection for this attribute
         // is in those excl_attrs, null that selection so it won't be included in the URL
