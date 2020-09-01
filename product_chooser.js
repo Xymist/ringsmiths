@@ -1,4 +1,4 @@
-import { fields } from './product_fields';
+import fields from './fields.json';
 
 // Object representing the current state of selections
 // the user has made
