@@ -293,14 +293,14 @@ const getImageSrc = (elem) => {
   // Use the image which considers the rest of the current selection,
   // with the value which this option would set overridden.
   let selected = [
-    affected_field === "style" ? elem.value : (selections.style || "court"),
-    affected_field === "metal" ? elem.value : (selections.metal || "yellow-gold"),
-    affected_field === "width" ? elem.value : (selections.width || "4mm")
+    affected_field === "style" ? elem.value : (fields[selections.style]?.value || "court"),
+    affected_field === "metal" ? elem.value : (fields[selections.metal]?.value || "yellow-gold"),
+    affected_field === "width" ? elem.value : (fields[selections.width]?.value || "4mm")
   ];
 
   let key = selected.join("-");
 
-  return "/uploads/2020/08/" + key + ".jpg"
+  return "/wp-content/uploads/2020/08/" + key + ".jpg"
 };
 
 // For a given element, fetch its child image and update the src attribute
@@ -313,6 +313,7 @@ const updateImageSrc = (elem) => {
   // will not be updated.
   if (elem_image && img_src) {
     elem_image.src = img_src;
+    elem_image.srcset = "";
   }
 }
 
