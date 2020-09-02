@@ -11,7 +11,7 @@ const deselectSiblings = (elem) => {
 
     // If it exists and is selected, and is not the thing that was just clicked,
     // deselect it.
-    if (sibling && sibling.classList.includes('selectedOption') && sibling !== elem) {
+    if (sibling && sibling.classList.contains('selectedOption') && sibling !== elem) {
       sibling.classList.remove('selectedOption');
     }
 
