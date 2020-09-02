@@ -3,10 +3,6 @@ import titleCase from './title_case.js';
 import deselectSiblings from './siblings.js';
 import '../styles/product_chooser.css';
 
-// Object representing the current state of selections
-// the user has made
-let selections = defaultSelections();
-
 const defaultSelections = () => {
   return {
     ring_type: "ring-plain",
@@ -16,6 +12,10 @@ const defaultSelections = () => {
     style: null,
   };
 };
+
+// Object representing the current state of selections
+// the user has made
+let selections = defaultSelections();
 
 const field_pfx = Object.keys(fields).reduce((tally, field_name) => {
   let field_id = field_name.split("-")[0];
