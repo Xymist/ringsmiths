@@ -307,7 +307,7 @@ var _title_case = _interopRequireDefault(require("./title_case.js"));
 
 var _siblings = _interopRequireDefault(require("./siblings.js"));
 
-require("../styles/product_chooser.css");
+var _product_chooser = _interopRequireDefault(require("../styles/product_chooser.css"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

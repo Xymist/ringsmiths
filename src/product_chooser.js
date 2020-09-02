@@ -1,7 +1,7 @@
 import fields from '../data/fields.json';
 import titleCase from './title_case.js';
 import deselectSiblings from './siblings.js';
-import '../styles/product_chooser.css';
+import _ from '../styles/product_chooser.css';
 
 const defaultSelections = () => {
   return {
