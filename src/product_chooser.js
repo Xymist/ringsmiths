@@ -2,12 +2,16 @@ import fields from './fields.json';
 
 // Object representing the current state of selections
 // the user has made
-let selections = {
-  ring_type: "ring-plain",
-  carat: null,
-  width: null,
-  metal: null,
-  style: null,
+let selections = defaultSelections();
+
+const defaultSelections = () => {
+  return {
+    ring_type: "ring-plain",
+    carat: null,
+    width: null,
+    metal: null,
+    style: null,
+  };
 };
 
 const field_pfx = Object.keys(fields).reduce((tally, field_name) => {
@@ -199,14 +203,12 @@ const initialHide = () => {
   let sects = Object.keys(selections);
   sects.push("spec");
   sects.forEach((pfx) => {
-    if (pfx === "metal") {
-      return
-    };
-
     let section = document.getElementById(pfx + '-option-section');
-    if (section) {
-      section.style.display = "none";
+    if ([null, undefined].includes(section)) {
+      return
     }
+
+    section.style.display = (pfx === "metal") ? "block" : "none";
   });
 }
 
@@ -241,6 +243,13 @@ const updateSpec = () => {
   setSpecImage(metal, style, width);
 }
 
+const resetChooser = () => {
+  selections = defaultSelections();
+  initialHide();
+  setHiddenOptions();
+  assembleUrl();
+}
+
 // Initially, the URL is invalid and so we just link to '#'.
 let url = '#';
 
@@ -256,14 +265,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   [...document.getElementsByClassName('next-button')].forEach((btn) => {
     btn.onclick = (event) => {
-      // Avoid page refresh
       event.preventDefault();
-
       skipToNextSection(event);
     };
   });
 
-  initialHide();
-  setHiddenOptions();
-  assembleUrl();
+  [...document.getElementsByClassName('reset-button')].forEach((btn) => {
+    btn.onclick = (event) => {
+      event.preventDefault();
+      resetChooser();
+    };
+  });
+
+  resetChooser();
 });
