@@ -9,4 +9,4 @@ const deselectSiblings = (elem) => {
   }
 };
 
-export default { deselectSiblings };
+export default deselectSiblings;
