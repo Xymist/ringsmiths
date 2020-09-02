@@ -1,4 +1,4 @@
-import fields from './fields.json';
+import fields from '../data/fields.json';
 import titleCase from './title_case.js';
 import deselectSiblings from './siblings.js'
 
