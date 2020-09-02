@@ -1,5 +1,6 @@
 import fields from './fields.json';
 import titleCase from './title_case.js';
+import deselectSiblings from './siblings.js'
 
 // Object representing the current state of selections
 // the user has made
@@ -172,7 +173,7 @@ const updateImageSrc = (elem) => {
     elem_image.src = img_src;
     elem_image.srcset = "";
   }
-}
+};
 
 // Get all attribute selectors, find their images and update
 // them to use the latest selections or defaults.
@@ -198,7 +199,7 @@ const skipToNextSection = (event) => {
     next_section = next_section.nextElementSibling
   };
   next_section.style.display = "block";
-}
+};
 
 const initialHide = () => {
   let sects = Object.keys(selections);
@@ -211,7 +212,7 @@ const initialHide = () => {
 
     section.style.display = (pfx === "metal") ? "block" : "none";
   });
-}
+};
 
 const setSpecText = (carat, metal, style, width) => {
   const target = document.getElementById('spec-text');
@@ -228,11 +229,11 @@ const setSpecImage = (metal, style, width) => {
 
   target.src = imageUrl(selected.join("-"));
   target.srcset = "";
-}
+};
 
 const imageUrl = (key) => {
   return "/wp-content/uploads/2020/08/" + key + ".jpg";
-}
+};
 
 const updateSpec = () => {
   const carat = fields[selections.carat]?.value;
@@ -242,14 +243,19 @@ const updateSpec = () => {
 
   setSpecText(carat, metal, style, width);
   setSpecImage(metal, style, width);
-}
+};
 
 const resetChooser = () => {
   selections = defaultSelections();
   initialHide();
   setHiddenOptions();
   assembleUrl();
-}
+};
+
+const setSelected = (elem) => {
+  elem.classList.add('selectedOption');
+  deselectSiblings(elem);
+};
 
 // Initially, the URL is invalid and so we just link to '#'.
 let url = '#';
@@ -258,6 +264,7 @@ let url = '#';
 document.addEventListener("DOMContentLoaded", function () {
   [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
     selector.onclick = () => {
+      setSelected(selector);
       updateUrlData(selector);
       updateImages();
       updateSpec();
