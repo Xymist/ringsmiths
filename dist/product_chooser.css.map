@@ -1,0 +1,1 @@
+{"version":3,"sources":["product_chooser.css"],"names":[],"mappings":"AAAA,gBACE,gBAAiB,CACjB,oBAAqB,CACrB,kCACF","file":"product_chooser.css","sourceRoot":"../src","sourcesContent":[".selectedOption {\n  border-width: 3px;\n  border-color: #f6c570;\n  box-shadow: 0px 2px 18px -5px #f6c570;\n}"]}
