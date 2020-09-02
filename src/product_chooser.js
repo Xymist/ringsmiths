@@ -242,6 +242,10 @@ const updateSpec = () => {
   const style = fields[selections.style]?.value;
   const width = fields[selections.width]?.value;
 
+  if (!(metal && style && width)) {
+    return
+  };
+
   setSpecText(carat, metal, style, width);
   setSpecImage(metal, style, width);
 };
