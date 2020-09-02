@@ -188,7 +188,7 @@ const skipToNextSection = (event) => {
   current_section.style.display = "none";
 
   // Open the next valid (i.e. not hidden) section.
-  next_section = current_section.nextElementSibling
+  let next_section = current_section.nextElementSibling
   while (next_section.hidden) {
     next_section = next_section.nextElementSibling
   };
