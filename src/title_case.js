@@ -6,4 +6,4 @@ const titleCase = (option) => {
   return words.join(" ");
 }
 
-export { titleCase };
+export default titleCase;

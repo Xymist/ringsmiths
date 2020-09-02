@@ -1,10 +1,7 @@
-import fields from './fields.json';
+import fields from '../data/fields.json';
 import titleCase from './title_case.js';
-import deselectSiblings from './siblings.js'
-
-// Object representing the current state of selections
-// the user has made
-let selections = defaultSelections();
+import deselectSiblings from './siblings.js';
+import _ from '../styles/product_chooser.css';
 
 const defaultSelections = () => {
   return {
@@ -15,6 +12,10 @@ const defaultSelections = () => {
     style: null,
   };
 };
+
+// Object representing the current state of selections
+// the user has made
+let selections = defaultSelections();
 
 const field_pfx = Object.keys(fields).reduce((tally, field_name) => {
   let field_id = field_name.split("-")[0];
@@ -240,6 +241,10 @@ const updateSpec = () => {
   const metal = fields[selections.metal]?.value;
   const style = fields[selections.style]?.value;
   const width = fields[selections.width]?.value;
+
+  if (!(metal && style && width)) {
+    return
+  };
 
   setSpecText(carat, metal, style, width);
   setSpecImage(metal, style, width);
