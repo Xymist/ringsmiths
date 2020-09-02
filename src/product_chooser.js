@@ -1,4 +1,5 @@
 import fields from './fields.json';
+import titleCase from './title_case.js';
 
 // Object representing the current state of selections
 // the user has made
@@ -214,7 +215,7 @@ const initialHide = () => {
 
 const setSpecText = (carat, metal, style, width) => {
   const target = document.getElementById('spec-text');
-  target.innerHTML = `Your chosen ring is a ${carat ? carat + ' ' : ''}${metal} ${style} wedding ring with a finger width of ${width}.`
+  target.innerHTML = `Your chosen ring is a ${carat ? carat + ' ' : ''}${titleCase(metal)} ${titleCase(style)} wedding ring with a finger width of ${width}.`
 }
 
 const setSpecImage = (metal, style, width) => {
