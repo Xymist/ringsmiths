@@ -4,6 +4,6 @@ const titleCase = (option) => {
     wds[idx] = word[0].toUpperCase() + word.slice(1).toLowerCase();
   });
   return words.join(" ");
-}
+};
 
 export default titleCase;
