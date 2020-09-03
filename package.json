@@ -5,7 +5,8 @@
   "main": "src/product_chooser.js",
   "scripts": {
     "dev": "parcel src/*_main.js",
-    "build": "parcel build src/*_main.js --no-source-maps --no-cache"
+    "build": "parcel build src/*_main.js --no-source-maps --no-cache",
+    "check": "flow"
   },
   "repository": {
     "type": "git",
