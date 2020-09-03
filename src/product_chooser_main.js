@@ -260,16 +260,44 @@ const updateSpec = () => {
   setSpecImage(metal, style, width);
 };
 
+const resetSelected = () => {
+  [...document.getElementsByClassName("ring-attribute-selector")].forEach(
+    (elem) => {
+      elem.classList.remove("selectedOption");
+    }
+  );
+};
+
 const resetChooser = () => {
   selections = defaultSelections();
+  resetSelected();
   initialHide();
   setHiddenOptions();
   assembleUrl();
 };
 
 const setSelected = (elem) => {
-  elem.classList.add("selectedOption");
-  deselectSiblings(elem);
+  if (elem.classList.contains("selectedOption")) {
+    // If this is already selected, deselect it
+    elem.classList.remove("selectedOption");
+  } else {
+    // Otherwise, select it and deselect anything else
+    // currently selected.
+    elem.classList.add("selectedOption");
+    deselectSiblings(elem);
+  }
+};
+
+const toggleNextButton = (elem) => {
+  const section = fields[elem.id]?.field;
+  const btn = document.getElementById(section + "-next");
+
+  // Bail if we can't find either the field or the button
+  if (!(section && btn)) {
+    return;
+  }
+
+  btn.hidden = [null, undefined].includes(selections[section]);
 };
 
 // Initially, the URL is invalid and so we just link to '#'.
@@ -281,6 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
     (selector) => {
       selector.onclick = () => {
         setSelected(selector);
+        toggleNextButton(selector);
         updateUrlData(selector);
         updateImages();
         updateSpec();
@@ -289,6 +318,9 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   [...document.getElementsByClassName("next-button")].forEach((btn) => {
+    // Hide all Next buttons to start with since their options
+    // are not selected
+    btn.hidden = true;
     btn.onclick = (event) => {
       event.preventDefault();
       skipToNextSection(event);
