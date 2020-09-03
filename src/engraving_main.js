@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ipt.value = "";
     etype.selectedIndex = 0;
     egv.toggleAttribute("hidden");
-    egv.toggleAttribute("hidden");
+    eft.toggleAttribute("hidden");
   };
 
   engraving_type.onchange = () => {
