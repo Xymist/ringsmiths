@@ -322,7 +322,8 @@ const toggleNextButton = (elem) => {
   const btn = document.getElementById(section + "-next");
 
   // Bail if we can't find either the field or the button
-  if (!(section && btn)) {
+  if (!btn) {
+    console.log("Failed to find Next button for section " + section);
     return;
   }
 
@@ -338,10 +339,10 @@ document.addEventListener("DOMContentLoaded", function () {
     (selector) => {
       selector.onclick = () => {
         setSelected(selector);
-        toggleNextButton(selector);
         updateUrlData(selector);
         updateImages();
         updateSpec();
+        toggleNextButton(selector);
         console.log(selections);
       };
     }
