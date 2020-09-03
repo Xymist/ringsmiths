@@ -326,7 +326,7 @@ const toggleNextButton = (elem) => {
     return;
   }
 
-  btn.style.display = selections[section] ? "block" : "none";
+  btn.style.display = selections[section] ? "inline-block" : "none";
 };
 
 // Initially, the URL is invalid and so we just link to '#'.
