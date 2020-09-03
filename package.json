@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/product_chooser.js",
   "scripts": {
-    "dev": "parcel src/product_chooser.js",
-    "build": "parcel build src/product_chooser.js --no-source-maps --no-cache"
+    "dev": "parcel src/*_main.js",
+    "build": "parcel build src/*_main.js --no-source-maps --no-cache",
+    "check": "flow"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/Xymist/ringsmiths#readme",
   "devDependencies": {
     "cssnano": "^4.1.10",
+    "flow-bin": "^0.133.0",
     "parcel-bundler": "^1.12.4"
   }
 }

@@ -1,7 +1,11 @@
-import fields from '../data/fields.json';
-import titleCase from './title_case.js';
-import deselectSiblings from './siblings.js';
-import _ from '../styles/product_chooser.css';
+// @flow
+
+import fields from "../data/fields.json";
+import titleCase from "./title_case.js";
+import deselectSiblings from "./siblings.js";
+import _ from "../styles/product_chooser.css";
+
+type optionalString = null | string;
 
 const defaultSelections = () => {
   return {
@@ -15,7 +19,13 @@ const defaultSelections = () => {
 
 // Object representing the current state of selections
 // the user has made
-let selections = defaultSelections();
+let selections: {
+  ring_type: optionalString,
+  carat: optionalString,
+  width: optionalString,
+  metal: optionalString,
+  style: optionalString,
+} = defaultSelections();
 
 const field_pfx = Object.keys(fields).reduce((tally, field_name) => {
   let field_id = field_name.split("-")[0];
@@ -32,10 +42,10 @@ const assembleUrl = () => {
     fields[selections.metal]?.value,
     fields[selections.style]?.value,
     "wedding-ring",
-  ].filter(Boolean)
+  ].filter(Boolean);
 
   // Construct the URL by joining the components
-  url = arr.join("-")
+  url = arr.join("-");
 };
 
 const setHiddenOptions = () => {
@@ -43,26 +53,28 @@ const setHiddenOptions = () => {
     selections.carat,
     selections.width,
     selections.style,
-    selections.metal
+    selections.metal,
   ].filter(Boolean);
-  let excluded = []
+  let excluded: Array<string> = [];
 
   // Push all excluded element ID sets
-  selected.forEach((entry) => { excluded.push(fields[entry]["excl_fields"]) })
+  selected.forEach((entry) => {
+    excluded.push(fields[entry]["excl_fields"]);
+  });
 
   // Deduplicate
-  excluded = new Set(excluded.flat().filter(Boolean));
-  excluded = [...excluded];
+  const excluded_set: Set<string> = new Set(excluded.flat().filter(Boolean));
+  excluded = [...excluded_set];
 
   // Get the names of all the option fields
-  const available_fields = Object.keys(fields);
+  const available_fields: Array<string> = Object.keys(fields);
 
   // Hide anything to exclude, reveal anything otherwise
   available_fields.forEach((field_id) => {
     let elem = document.getElementById(field_id);
     if (elem) {
       elem.hidden = excluded.includes(field_id);
-    };
+    }
   });
 
   const excluded_pfx = excluded.reduce((tally, field_name) => {
@@ -72,16 +84,16 @@ const setHiddenOptions = () => {
   }, {});
 
   Object.keys(selections).forEach((pfx) => {
-    let section = document.getElementById(pfx + '-option-section');
+    let section = document.getElementById(pfx + "-option-section");
     if (section) {
-      section.hidden = (excluded_pfx[pfx] === field_pfx[pfx]);
+      section.hidden = excluded_pfx[pfx] === field_pfx[pfx];
     }
   });
 };
 
 const updateUrlData = (elem) => {
   // Find the appropriate content in the appropriate map for this element
-  const elem_details = fields[elem.id]
+  const elem_details = fields[elem.id];
 
   // Fetch the field to update and the value to set it to
   const affected_field = elem_details["field"];
@@ -98,16 +110,16 @@ const updateUrlData = (elem) => {
     // Erase attributes that are impossible (e.g. carat)
     if (elem_details.excl_attrs !== undefined) {
       Object.keys(selections).forEach((attrib) => {
-        const excl = elem_details.excl_fields
+        const excl = elem_details.excl_fields;
 
         // If there are excl_attrs for this attribute, and the current selection for this attribute
         // is in those excl_attrs, null that selection so it won't be included in the URL
         if (excl !== undefined && excl.includes(selections[attrib])) {
-          selections[attrib] = null
+          selections[attrib] = null;
         }
       });
     }
-  };
+  }
 
   setHiddenOptions();
   assembleUrl();
@@ -118,34 +130,40 @@ const validUrl = () => {
   let res = true;
 
   Object.keys(selections).forEach((key) => {
-    let associated_section = document.getElementById(key + '-option-section');
+    let associated_section = document.getElementById(key + "-option-section");
     // If the key is null but the section is not hidden,
     // we're missing an attribute
     if (!selections[key] && associated_section && !associated_section.hidden) {
-      res = false
-    };
+      res = false;
+    }
   });
 
-  return res
+  return res;
 };
 
 // The "finalise" button takes the user to the relevant product page
 const setFinaliseUrl = () => {
-  let btn = document.getElementById('finalise_ring');
+  let btn = document.getElementById("finalise_ring");
+
+  /*::
+    if (!(btn instanceof HTMLAnchorElement)) {
+      return;
+    }
+  */
 
   if (validUrl()) {
     btn.href = "/product/" + url;
   } else {
     btn.href = "#";
-  };
+  }
 };
 
 const getImageSrc = (elem) => {
   // Find the appropriate content in the appropriate map for this element
   const elem_details = fields[elem.id];
 
-  if (elem_details === undefined) {
-    return
+  if (!elem_details) {
+    return;
   }
 
   // Fetch the field to update and the value to set it to
@@ -154,9 +172,15 @@ const getImageSrc = (elem) => {
   // Use the image which considers the rest of the current selection,
   // with the value which this option would set overridden.
   let selected = [
-    affected_field === "style" ? elem_details.value : (fields[selections.style]?.value || "court"),
-    affected_field === "metal" ? elem_details.value : (fields[selections.metal]?.value || "yellow-gold"),
-    affected_field === "width" ? elem_details.value : (fields[selections.width]?.value || "4mm")
+    affected_field === "style"
+      ? elem_details.value
+      : fields[selections.style]?.value || "court",
+    affected_field === "metal"
+      ? elem_details.value
+      : fields[selections.metal]?.value || "yellow-gold",
+    affected_field === "width"
+      ? elem_details.value
+      : fields[selections.width]?.value || "4mm",
   ];
 
   return imageUrl(selected.join("-"));
@@ -171,6 +195,11 @@ const updateImageSrc = (elem) => {
   // For those, img_src will be blank, so the relevant image
   // will not be updated.
   if (elem_image && img_src) {
+    /*::
+      if (!(elem_image instanceof HTMLImageElement)) {
+        throw new Error('target element image was not found');
+      }
+    */
     elem_image.src = img_src;
     elem_image.srcset = "";
   }
@@ -179,26 +208,28 @@ const updateImageSrc = (elem) => {
 // Get all attribute selectors, find their images and update
 // them to use the latest selections or defaults.
 const updateImages = () => {
-  [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
-    updateImageSrc(selector);
-  })
+  [...document.getElementsByClassName("ring-attribute-selector")].forEach(
+    (selector) => {
+      updateImageSrc(selector);
+    }
+  );
 };
 
 const skipToNextSection = (event) => {
   // Do nothing if no selection has been made
   if ([null, undefined].includes(selections[event.target.id.split("-")[0]])) {
-    return
-  };
+    return;
+  }
 
   // Hide this section.
-  const current_section = event.target.closest(".et_pb_section")
+  const current_section = event.target.closest(".et_pb_section");
   current_section.style.display = "none";
 
   // Open the next valid (i.e. not hidden) section.
-  let next_section = current_section.nextElementSibling
+  let next_section = current_section.nextElementSibling;
   while (next_section.hidden) {
-    next_section = next_section.nextElementSibling
-  };
+    next_section = next_section.nextElementSibling;
+  }
   next_section.style.display = "block";
 };
 
@@ -206,27 +237,35 @@ const initialHide = () => {
   let sects = Object.keys(selections);
   sects.push("spec");
   sects.forEach((pfx) => {
-    let section = document.getElementById(pfx + '-option-section');
-    if ([null, undefined].includes(section)) {
-      return
-    }
+    let section = document.getElementById(pfx + "-option-section");
 
-    section.style.display = (pfx === "metal") ? "block" : "none";
+    if (section) {
+      section.style.display = pfx === "metal" ? "block" : "none";
+    }
   });
 };
 
 const setSpecText = (carat, metal, style, width) => {
-  const target = document.getElementById('spec-text');
-  target.innerHTML = `Your chosen ring is a ${carat ? carat + ' ' : ''}${titleCase(metal)} ${titleCase(style)} wedding ring with a finger width of ${width}.`
-}
+  const target = document.getElementById("spec-text");
+
+  if (target) {
+    target.innerHTML = `Your chosen ring is a ${
+      carat ? carat + " " : ""
+    }${titleCase(metal)} ${titleCase(
+      style
+    )} wedding ring with a finger width of ${width}.`;
+  }
+};
 
 const setSpecImage = (metal, style, width) => {
-  const target = document.getElementById('spec-image');
-  let selected = [
-    style || "court",
-    metal || "yellow-gold",
-    width || "4mm"
-  ];
+  const target = document.getElementById("spec-image");
+  let selected = [style || "court", metal || "yellow-gold", width || "4mm"];
+
+  /*::
+  if (!(target instanceof HTMLImageElement)) {
+    throw new Error('target spec-image was not found');
+  }
+  */
 
   target.src = imageUrl(selected.join("-"));
   target.srcset = "";
@@ -243,47 +282,81 @@ const updateSpec = () => {
   const width = fields[selections.width]?.value;
 
   if (!(metal && style && width)) {
-    return
-  };
+    return;
+  }
 
   setSpecText(carat, metal, style, width);
   setSpecImage(metal, style, width);
 };
 
+const resetSelected = () => {
+  [...document.getElementsByClassName("ring-attribute-selector")].forEach(
+    (elem) => {
+      elem.classList.remove("selectedOption");
+    }
+  );
+};
+
 const resetChooser = () => {
   selections = defaultSelections();
+  resetSelected();
   initialHide();
   setHiddenOptions();
   assembleUrl();
 };
 
 const setSelected = (elem) => {
-  elem.classList.add('selectedOption');
-  deselectSiblings(elem);
+  if (elem.classList.contains("selectedOption")) {
+    // If this is already selected, deselect it
+    elem.classList.remove("selectedOption");
+  } else {
+    // Otherwise, select it and deselect anything else
+    // currently selected.
+    elem.classList.add("selectedOption");
+    deselectSiblings(elem);
+  }
+};
+
+const toggleNextButton = (elem) => {
+  const section = fields[elem.id]?.field;
+  const btn = document.getElementById(section + "-next");
+
+  // Bail if we can't find either the field or the button
+  if (!btn) {
+    return;
+  }
+
+  btn.style.display = selections[section] ? "inline-block" : "none";
 };
 
 // Initially, the URL is invalid and so we just link to '#'.
-let url = '#';
+let url = "#";
 
 // Entrypoint for the product chooser logic
 document.addEventListener("DOMContentLoaded", function () {
-  [...document.getElementsByClassName('ring-attribute-selector')].forEach((selector) => {
-    selector.onclick = () => {
-      setSelected(selector);
-      updateUrlData(selector);
-      updateImages();
-      updateSpec();
+  [...document.getElementsByClassName("ring-attribute-selector")].forEach(
+    (selector) => {
+      selector.onclick = () => {
+        setSelected(selector);
+        updateUrlData(selector);
+        updateImages();
+        updateSpec();
+        toggleNextButton(selector);
+      };
     }
-  });
+  );
 
-  [...document.getElementsByClassName('next-button')].forEach((btn) => {
+  [...document.getElementsByClassName("next-button")].forEach((btn) => {
+    // Hide all Next buttons to start with since their options
+    // are not selected
+    btn.style.display = "none";
     btn.onclick = (event) => {
       event.preventDefault();
       skipToNextSection(event);
     };
   });
 
-  [...document.getElementsByClassName('reset-button')].forEach((btn) => {
+  [...document.getElementsByClassName("reset-button")].forEach((btn) => {
     btn.onclick = (event) => {
       event.preventDefault();
       resetChooser();
