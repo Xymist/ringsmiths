@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/product_chooser.js",
   "scripts": {
-    "dev": "parcel src/*_main.js",
+    "dev": "parcel src/index.html --no-source-maps --no-cache",
     "build": "parcel build src/*_main.js --no-source-maps --no-cache",
-    "check": "flow"
+    "check": "flow",
+    "typed": "flow-typed install"
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,19 @@
   },
   "homepage": "https://github.com/Xymist/ringsmiths#readme",
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
     "cssnano": "^4.1.10",
     "flow-bin": "^0.133.0",
-    "parcel-bundler": "^1.12.4"
+    "flow-typed": "^3.2.1",
+    "parcel-bundler": "^1.12.4",
+    "redux-devtools": "^3.6.1"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1"
   }
 }
