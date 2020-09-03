@@ -342,6 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateUrlData(selector);
         updateImages();
         updateSpec();
+        console.log(selections);
       };
     }
   );
