@@ -162,7 +162,7 @@ const getImageSrc = (elem) => {
   // Find the appropriate content in the appropriate map for this element
   const elem_details = fields[elem.id];
 
-  if (elem_details === undefined) {
+  if (!elem_details) {
     return;
   }
 
