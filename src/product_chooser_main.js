@@ -326,7 +326,7 @@ const toggleNextButton = (elem) => {
     return;
   }
 
-  btn.hidden = [null, undefined].includes(selections[section]);
+  btn.style.display = selections[section] ? "block" : "none";
 };
 
 // Initially, the URL is invalid and so we just link to '#'.
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
   [...document.getElementsByClassName("next-button")].forEach((btn) => {
     // Hide all Next buttons to start with since their options
     // are not selected
-    btn.hidden = true;
+    btn.style.display = "none";
     btn.onclick = (event) => {
       event.preventDefault();
       skipToNextSection(event);
