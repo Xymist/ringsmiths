@@ -323,7 +323,6 @@ const toggleNextButton = (elem) => {
 
   // Bail if we can't find either the field or the button
   if (!btn) {
-    console.log("Failed to find Next button for section " + section);
     return;
   }
 
@@ -343,7 +342,6 @@ document.addEventListener("DOMContentLoaded", function () {
         updateImages();
         updateSpec();
         toggleNextButton(selector);
-        console.log(selections);
       };
     }
   );
