@@ -11,29 +11,17 @@
     "field": "carat",
     "value": "9ct",
     "excl_attrs": {
-      "metal": [
-        "titanium",
-        "platinum"
-      ]
+      "metal": ["titanium", "platinum"]
     },
-    "excl_fields": [
-      "metal-titanium",
-      "metal-platinum"
-    ]
+    "excl_fields": ["metal-titanium", "metal-platinum"]
   },
   "carat-18": {
     "field": "carat",
     "value": "18ct",
     "excl_attrs": {
-      "metal": [
-        "titanium",
-        "platinum"
-      ]
+      "metal": ["titanium", "platinum"]
     },
-    "excl_fields": [
-      "metal-titanium",
-      "metal-platinum"
-    ]
+    "excl_fields": ["metal-titanium", "metal-platinum"]
   },
   "style-flat": {
     "field": "style",
@@ -55,39 +43,25 @@
     "field": "width",
     "value": "2mm",
     "excl_attrs": {
-      "metal": [
-        "titanium"
-      ]
+      "metal": ["titanium"]
     },
-    "excl_fields": [
-      "metal-titanium"
-    ]
+    "excl_fields": ["metal-titanium"]
   },
   "width-2.5": {
     "field": "width",
     "value": "2-5mm",
     "excl_attrs": {
-      "metal": [
-        "rose-gold",
-        "titanium"
-      ]
+      "metal": ["rose-gold", "titanium"]
     },
-    "excl_fields": [
-      "metal-titanium",
-      "metal-rosegold"
-    ]
+    "excl_fields": ["metal-titanium", "metal-rosegold"]
   },
   "width-3": {
     "field": "width",
     "value": "3mm",
     "excl_attrs": {
-      "metal": [
-        "titanium"
-      ]
+      "metal": ["titanium"]
     },
-    "excl_fields": [
-      "metal-titanium"
-    ]
+    "excl_fields": ["metal-titanium"]
   },
   "width-4": {
     "field": "width",
@@ -101,25 +75,17 @@
     "field": "width",
     "value": "6mm",
     "excl_attrs": {
-      "metal": [
-        "rose-gold"
-      ]
+      "metal": ["rose-gold"]
     },
-    "excl_fields": [
-      "metal-rosegold"
-    ]
+    "excl_fields": ["metal-rosegold"]
   },
   "width-8": {
     "field": "width",
     "value": "8mm",
     "excl_attrs": {
-      "metal": [
-        "rose-gold"
-      ]
+      "metal": ["rose-gold"]
     },
-    "excl_fields": [
-      "metal-rosegold"
-    ]
+    "excl_fields": ["metal-rosegold"]
   },
   "metal-yellowgold": {
     "field": "metal",
@@ -129,17 +95,9 @@
     "field": "metal",
     "value": "rose-gold",
     "excl_attrs": {
-      "width": [
-        "6mm",
-        "8mm",
-        "2.5mm"
-      ]
+      "width": ["6mm", "8mm", "2.5mm"]
     },
-    "excl_fields": [
-      "width-6",
-      "width-8",
-      "width-2.5"
-    ]
+    "excl_fields": ["width-6", "width-8", "width-2.5"]
   },
   "metal-whitegold": {
     "field": "metal",
@@ -149,36 +107,17 @@
     "field": "metal",
     "value": "platinum",
     "excl_attrs": {
-      "carat": [
-        "9ct",
-        "18ct"
-      ]
+      "carat": ["9ct", "18ct"]
     },
-    "excl_fields": [
-      "carat-9",
-      "carat-18"
-    ]
+    "excl_fields": ["carat-9", "carat-18"]
   },
   "metal-titanium": {
     "field": "metal",
     "value": "titanium",
     "excl_attrs": {
-      "width": [
-        "2mm",
-        "2.5mm",
-        "3mm"
-      ],
-      "carat": [
-        "9ct",
-        "18ct"
-      ]
+      "width": ["2mm", "2.5mm", "3mm"],
+      "carat": ["9ct", "18ct"]
     },
-    "excl_fields": [
-      "carat-9",
-      "carat-18",
-      "width-2",
-      "width-2.5",
-      "width-3"
-    ]
+    "excl_fields": ["carat-9", "carat-18", "width-2", "width-2.5", "width-3"]
   }
 }
