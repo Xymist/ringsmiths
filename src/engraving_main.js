@@ -1,3 +1,5 @@
+// @flow
+
 import fonts from "../data/fonts.json";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -17,18 +19,24 @@ document.addEventListener("DOMContentLoaded", function () {
     "wc-pao-addon-container wc-pao-addon wc-pao-addon-engraving-font"
   )[0];
 
+  /*::
+    if (!(engraving_type instanceof HTMLSelectElement) || !(ipt instanceof HTMLInputElement)) {
+      return;
+    }
+  */
+
   // Hide engraving options to start with
-  egv.setAttribute("hidden", true);
-  eft.setAttribute("hidden", true);
+  egv.setAttribute("hidden", "true");
+  eft.setAttribute("hidden", "true");
 
   engraving_option.onclick = () => {
     ipt.value = "";
-    etype.selectedIndex = 0;
+    engraving_type.selectedIndex = 0;
     egv.toggleAttribute("hidden");
     eft.toggleAttribute("hidden");
   };
 
   engraving_type.onchange = () => {
-    ipt.style.fontFamily = "'" + fonts[etype.value] + "'";
+    ipt.style.fontFamily = "'" + fonts[engraving_type.value] + "'";
   };
 });

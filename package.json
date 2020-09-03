@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Xymist/ringsmiths#readme",
   "devDependencies": {
     "cssnano": "^4.1.10",
+    "flow-bin": "^0.133.0",
     "parcel-bundler": "^1.12.4"
   }
 }

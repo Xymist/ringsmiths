@@ -1,7 +1,11 @@
+// @flow
+
 import fields from "../data/fields.json";
 import titleCase from "./title_case.js";
 import deselectSiblings from "./siblings.js";
 import _ from "../styles/product_chooser.css";
+
+type optionalString = null | string;
 
 const defaultSelections = () => {
   return {
@@ -15,7 +19,13 @@ const defaultSelections = () => {
 
 // Object representing the current state of selections
 // the user has made
-let selections = defaultSelections();
+let selections: {
+  ring_type: optionalString,
+  carat: optionalString,
+  width: optionalString,
+  metal: optionalString,
+  style: optionalString,
+} = defaultSelections();
 
 const field_pfx = Object.keys(fields).reduce((tally, field_name) => {
   let field_id = field_name.split("-")[0];
@@ -45,7 +55,7 @@ const setHiddenOptions = () => {
     selections.style,
     selections.metal,
   ].filter(Boolean);
-  let excluded = [];
+  let excluded: Array<string> = [];
 
   // Push all excluded element ID sets
   selected.forEach((entry) => {
@@ -53,11 +63,11 @@ const setHiddenOptions = () => {
   });
 
   // Deduplicate
-  excluded = new Set(excluded.flat().filter(Boolean));
-  excluded = [...excluded];
+  const excluded_set: Set<string> = new Set(excluded.flat().filter(Boolean));
+  excluded = [...excluded_set];
 
   // Get the names of all the option fields
-  const available_fields = Object.keys(fields);
+  const available_fields: Array<string> = Object.keys(fields);
 
   // Hide anything to exclude, reveal anything otherwise
   available_fields.forEach((field_id) => {
@@ -135,6 +145,12 @@ const validUrl = () => {
 const setFinaliseUrl = () => {
   let btn = document.getElementById("finalise_ring");
 
+  /*::
+    if (!(btn instanceof HTMLAnchorElement)) {
+      return;
+    }
+  */
+
   if (validUrl()) {
     btn.href = "/product/" + url;
   } else {
@@ -179,6 +195,11 @@ const updateImageSrc = (elem) => {
   // For those, img_src will be blank, so the relevant image
   // will not be updated.
   if (elem_image && img_src) {
+    /*::
+      if (!(elem_image instanceof HTMLImageElement)) {
+        throw new Error('target element image was not found');
+      }
+    */
     elem_image.src = img_src;
     elem_image.srcset = "";
   }
@@ -217,26 +238,34 @@ const initialHide = () => {
   sects.push("spec");
   sects.forEach((pfx) => {
     let section = document.getElementById(pfx + "-option-section");
-    if ([null, undefined].includes(section)) {
-      return;
-    }
 
-    section.style.display = pfx === "metal" ? "block" : "none";
+    if (section) {
+      section.style.display = pfx === "metal" ? "block" : "none";
+    }
   });
 };
 
 const setSpecText = (carat, metal, style, width) => {
   const target = document.getElementById("spec-text");
-  target.innerHTML = `Your chosen ring is a ${
-    carat ? carat + " " : ""
-  }${titleCase(metal)} ${titleCase(
-    style
-  )} wedding ring with a finger width of ${width}.`;
+
+  if (target) {
+    target.innerHTML = `Your chosen ring is a ${
+      carat ? carat + " " : ""
+    }${titleCase(metal)} ${titleCase(
+      style
+    )} wedding ring with a finger width of ${width}.`;
+  }
 };
 
 const setSpecImage = (metal, style, width) => {
   const target = document.getElementById("spec-image");
   let selected = [style || "court", metal || "yellow-gold", width || "4mm"];
+
+  /*::
+  if (!(target instanceof HTMLImageElement)) {
+    throw new Error('target spec-image was not found');
+  }
+  */
 
   target.src = imageUrl(selected.join("-"));
   target.srcset = "";
