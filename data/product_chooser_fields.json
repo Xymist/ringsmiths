@@ -1,6 +1,7 @@
 [
   {
     "choice": "metal",
+    "title": "Let's get started",
     "options": [
       {
         "value": "yellow-gold",
@@ -34,6 +35,7 @@
   },
   {
     "choice": "carat",
+    "title": "Now let's choose a carat",
     "options": [
       {
         "value": "9ct",
@@ -51,6 +53,7 @@
   },
   {
     "choice": "style",
+    "title": "Now let's choose a style",
     "options": [
       {
         "value": "flat",
@@ -72,6 +75,7 @@
   },
   {
     "choice": "width",
+    "title": "Pick your width",
     "options": [
       {
         "value": "2mm",

@@ -7,6 +7,7 @@ import { PreviousButton } from "./previous_button";
 import { ResetButton } from "./reset_button";
 import { NextButton } from "./next_button";
 import { useSelector } from "react-redux";
+import { progressUrl } from "../utils/image_url";
 
 export const ProductChoice = (props: any) => {
   const field = props.field;
@@ -18,9 +19,14 @@ export const ProductChoice = (props: any) => {
       state.productChooser.visibleSection.idx
     ];
   });
+  const currentIdx = useSelector((state) => {
+    return state.productChooser.visibleSection.idx + 1;
+  });
 
   return (
     <div className={visibleSection !== field.choice ? "invisible-option" : ""}>
+      <h3>{field.title}</h3>
+      <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
         {field.options.map((option) => {
           return (

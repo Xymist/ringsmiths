@@ -1,16 +1,17 @@
 .product-option {
   text-align: center;
   margin: 1.2em;
-  border-bottom-color: rgb(102, 102, 102);
+  border-bottom-color: #666666;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-image: linear-gradient(
-    360deg,
-    rgba(234, 235, 239, 0.45) 0%,
-    rgb(255, 255, 255) 100%
-  );
+  background-image: linear-gradient(360deg, rgba(234, 235, 239, 0.45) 0%, white 100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.product-option:hover {
+  transform: scale(1.02);
 }
 
 .selected-option {
@@ -48,9 +49,9 @@
 
 .next-button {
   border-width: 2px;
-  border-color: rgb(255, 255, 255);
+  border-color: white;
   border-radius: 5px;
-  color: rgb(255, 255, 255);
+  color: white;
   background-color: #303960;
 }
 
@@ -60,11 +61,11 @@ h3,
 .next-button,
 .previous-button,
 .reset-button {
-  font-family: "Quattrocento", Helvetica, Arial, Lucida, sans-serif !important;
+  font-family: "Quattrocento", Helvetica, Arial, Lucida, sans-serif;
 }
 
 #product-chooser-body {
-  background-color: rgb(234, 235, 239);
+  background-color: #eaebef;
 }
 
 a.next-button {
@@ -96,6 +97,7 @@ a.next-button {
 
 .product-chooser-root {
   width: 80%;
+  height: 100%;
   margin: auto;
 }
 
@@ -105,4 +107,16 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
+}
+
+.progress-bar {
+  display: block;
+  width: 90%;
+  height: 30px;
+  margin: auto;
+}
+
+.product-image {
+  width: 80%;
+  margin: auto;
 }

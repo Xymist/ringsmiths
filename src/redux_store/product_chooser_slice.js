@@ -1,6 +1,6 @@
 // @flow
 
-import fields from "../../data/fields.json";
+import fields from "../../data/product_chooser_fields.json";
 import { createSlice } from "@reduxjs/toolkit";
 import { stat } from "fs";
 

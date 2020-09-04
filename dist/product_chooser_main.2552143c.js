@@ -31662,9 +31662,10 @@ var _shallowEqual = _interopRequireDefault(require("./utils/shallowEqual"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
-},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"../data/fields.json":[function(require,module,exports) {
+},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"../data/product_chooser_fields.json":[function(require,module,exports) {
 module.exports = [{
   "choice": "metal",
+  "title": "Let's get started",
   "options": [{
     "value": "yellow-gold",
     "excl_attrs": []
@@ -31695,6 +31696,7 @@ module.exports = [{
   }]
 }, {
   "choice": "carat",
+  "title": "Now let's choose a carat",
   "options": [{
     "value": "9ct",
     "excl_attrs": [{
@@ -31710,6 +31712,7 @@ module.exports = [{
   }]
 }, {
   "choice": "style",
+  "title": "Now let's choose a style",
   "options": [{
     "value": "flat",
     "excl_attrs": []
@@ -31725,6 +31728,7 @@ module.exports = [{
   }]
 }, {
   "choice": "width",
+  "title": "Pick your width",
   "options": [{
     "value": "2mm",
     "excl_attrs": [{
@@ -34765,7 +34769,7 @@ function unwrapResult(returned) {
 (0, _immer.enableES5)();
 },{"immer":"../node_modules/immer/dist/immer.esm.js","redux":"../node_modules/redux/es/redux.js","reselect":"../node_modules/reselect/es/index.js","redux-thunk":"../node_modules/redux-thunk/es/index.js"}],"../node_modules/parcel-bundler/src/builtins/_empty.js":[function(require,module,exports) {
 
-},{}],"../src/product_chooser/product_chooser_slice.js":[function(require,module,exports) {
+},{}],"../src/redux_store/product_chooser_slice.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34773,7 +34777,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.productUrl = exports.productChooserSlice = void 0;
 
-var _fields = _interopRequireDefault(require("../../data/fields.json"));
+var _product_chooser_fields = _interopRequireDefault(require("../../data/product_chooser_fields.json"));
 
 var _toolkit = require("@reduxjs/toolkit");
 
@@ -34827,7 +34831,7 @@ var productChooserSlice = (0, _toolkit.createSlice)({
     selectOption: function selectOption(state, action) {
       state.selections[action.payload.field] = action.payload.value;
 
-      _fields.default.forEach(function (field) {
+      _product_chooser_fields.default.forEach(function (field) {
         state.unavailable[field.choice] = [];
         field.options.forEach(function (opt) {
           var exclusions = opt.excl_attrs;
@@ -34883,7 +34887,7 @@ var productUrl = function productUrl(state) {
 };
 
 exports.productUrl = productUrl;
-},{"../../data/fields.json":"../data/fields.json","@reduxjs/toolkit":"../node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js","fs":"../node_modules/parcel-bundler/src/builtins/_empty.js"}],"../src/store.js":[function(require,module,exports) {
+},{"../../data/product_chooser_fields.json":"../data/product_chooser_fields.json","@reduxjs/toolkit":"../node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js","fs":"../node_modules/parcel-bundler/src/builtins/_empty.js"}],"../src/redux_store/store.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34893,7 +34897,7 @@ exports.default = void 0;
 
 var _toolkit = require("@reduxjs/toolkit");
 
-var _product_chooser_slice = require("./product_chooser/product_chooser_slice.js");
+var _product_chooser_slice = require("./product_chooser_slice.js");
 
 var _default = (0, _toolkit.configureStore)({
   reducer: {
@@ -34902,7 +34906,7 @@ var _default = (0, _toolkit.configureStore)({
 });
 
 exports.default = _default;
-},{"@reduxjs/toolkit":"../node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js","./product_chooser/product_chooser_slice.js":"../src/product_chooser/product_chooser_slice.js"}],"../src/utils/title_case.js":[function(require,module,exports) {
+},{"@reduxjs/toolkit":"../node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js","./product_chooser_slice.js":"../src/redux_store/product_chooser_slice.js"}],"../src/utils/title_case.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34983,7 +34987,7 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _reactRedux = require("react-redux");
 
-var _product_chooser_slice = require("./product_chooser_slice");
+var _product_chooser_slice = require("../redux_store/product_chooser_slice");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34998,7 +35002,7 @@ var FinaliseButton = function FinaliseButton() {
 };
 
 exports.FinaliseButton = FinaliseButton;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","./product_chooser_slice":"../src/product_chooser/product_chooser_slice.js"}],"../src/product_chooser/reset_button.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","../redux_store/product_chooser_slice":"../src/redux_store/product_chooser_slice.js"}],"../src/product_chooser/reset_button.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35016,21 +35020,43 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ResetButton = function ResetButton() {
   var dispatch = (0, _reactRedux.useDispatch)();
+  var initialSection = (0, _reactRedux.useSelector)(function (state) {
+    return state.productChooser.visibleSection.idx === 0;
+  });
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "section-button"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "reset-button",
+    className: "reset-button" + (initialSection ? " invisible-option" : ""),
     onClick: function onClick(e) {
       e.preventDefault();
       dispatch({
         type: "productChooser/resetSelections"
       });
     }
-  }, "Reset"));
+  }, "Start Again"));
 };
 
 exports.ResetButton = ResetButton;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js"}],"../src/product_chooser/product_result.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js"}],"../src/utils/image_url.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.progressUrl = exports.imageUrl = void 0;
+
+var imageUrl = function imageUrl(key) {
+  return "/wp-content/uploads/2020/08/" + key + ".jpg";
+};
+
+exports.imageUrl = imageUrl;
+
+var progressUrl = function progressUrl(stage) {
+  return "/wp-content/uploads/2020/09/progress-bar-stage" + stage.toString() + ".png";
+};
+
+exports.progressUrl = progressUrl;
+},{}],"../src/product_chooser/product_result.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35052,6 +35078,8 @@ var _finalise_button = require("./finalise_button");
 
 var _reset_button = require("./reset_button");
 
+var _image_url = require("../utils/image_url");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -35070,9 +35098,12 @@ var ProductResult = function ProductResult(props) {
   var visibleSection = (0, _reactRedux.useSelector)(function (state) {
     return state.productChooser.visibleSection.order[state.productChooser.visibleSection.idx];
   });
+  var currentIdx = (0, _reactRedux.useSelector)(function (state) {
+    return state.productChooser.visibleSection.idx + 1;
+  });
 
   var _useSelector = (0, _reactRedux.useSelector)(function (state) {
-    return [state.productChooser.selections.carat, state.productChooser.selections.metal || "yellow-gold", state.productChooser.selections.style || "court", state.productChooser.selections.width || "4mm"];
+    return [state.productChooser.selections.carat, (0, _title_case.default)(state.productChooser.selections.metal || "yellow-gold"), (0, _title_case.default)(state.productChooser.selections.style || "court"), (0, _title_case.default)(state.productChooser.selections.width || "4mm")];
   }),
       _useSelector2 = _slicedToArray(_useSelector, 4),
       carat = _useSelector2[0],
@@ -35080,20 +35111,23 @@ var ProductResult = function ProductResult(props) {
       style = _useSelector2[2],
       width = _useSelector2[3];
 
-  var specText = "Your chosen ring is a ".concat(carat ? carat + " " : "").concat((0, _title_case.default)(metal), " ").concat((0, _title_case.default)(style), " wedding ring with a finger width of ").concat((0, _title_case.default)(width), ".");
   return /*#__PURE__*/_react.default.createElement("div", {
     className: visibleSection === "result" ? "" : " invisible-option"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h3", null, "Your perfect ring"), /*#__PURE__*/_react.default.createElement("img", {
+    className: "progress-bar",
+    src: (0, _image_url.progressUrl)(currentIdx)
+  }), /*#__PURE__*/_react.default.createElement("div", {
     className: "option-set"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "spec-image product-option"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: "noop"
+    className: "product-image",
+    src: (0, _image_url.imageUrl)([style, metal, width].join("-"))
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "spec-text-container product-option"
-  }, /*#__PURE__*/_react.default.createElement("p", {
+  }, /*#__PURE__*/_react.default.createElement("h3", null, "Your Perfect Ring"), /*#__PURE__*/_react.default.createElement("p", {
     className: "spec-text"
-  }, specText), /*#__PURE__*/_react.default.createElement("p", {
+  }, "Your chosen ring is a ", carat ? carat + " " : "", metal, " ", style, " wedding ring with a finger width of ", width, "."), /*#__PURE__*/_react.default.createElement("p", {
     className: "spec-text"
   }, "We make your rings using recycled metals and only use recycled and recyclable packaging materials. When you purchase a ring from Ringsmiths, we go the extra mile to create something just for you. To find out more about your perfect ring such as price, customisation options and to order a free eco-friendly sample of your ring, click on the button below."))), /*#__PURE__*/_react.default.createElement("div", {
     className: "section-footer"
@@ -35103,7 +35137,7 @@ var ProductResult = function ProductResult(props) {
 };
 
 exports.ProductResult = ProductResult;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","../utils/title_case":"../src/utils/title_case.js","./previous_button":"../src/product_chooser/previous_button.jsx","./finalise_button":"../src/product_chooser/finalise_button.jsx","./reset_button":"../src/product_chooser/reset_button.jsx"}],"../src/product_chooser/product_option.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","../utils/title_case":"../src/utils/title_case.js","./previous_button":"../src/product_chooser/previous_button.jsx","./finalise_button":"../src/product_chooser/finalise_button.jsx","./reset_button":"../src/product_chooser/reset_button.jsx","../utils/image_url":"../src/utils/image_url.js"}],"../src/product_chooser/product_option.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35119,6 +35153,8 @@ var _reactRedux = require("react-redux");
 
 var _title_case = _interopRequireDefault(require("../utils/title_case.js"));
 
+var _image_url = require("../utils/image_url.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ProductOption = function ProductOption(props) {
@@ -35132,6 +35168,7 @@ var ProductOption = function ProductOption(props) {
   var dispatch = (0, _reactRedux.useDispatch)();
   var selected = props.option.value === selectedOptions[props.choice];
   var unavailable = unavailableOptions[props.choice].includes(props.option.value);
+  var imageData = [props.choice === "style" ? props.option.value : selectedOptions.style || "court", props.choice === "metal" ? props.option.value : selectedOptions.metal || "yellow-gold", props.choice === "width" ? props.option.value : selectedOptions.width || "4mm"].join("-");
   return /*#__PURE__*/_react.default.createElement("div", {
     id: id,
     className: (selected ? "selected-option " : "") + (unavailable ? "invisible-option " : "") + "product-option",
@@ -35148,16 +35185,13 @@ var ProductOption = function ProductOption(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement("h3", null, (0, _title_case.default)(props.option.value)), /*#__PURE__*/_react.default.createElement("img", {
-    src: "noop",
-    style: {
-      width: "80%",
-      margin: "auto"
-    }
+    src: (0, _image_url.imageUrl)(imageData),
+    className: "product-image"
   }));
 };
 
 exports.ProductOption = ProductOption;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","../utils/title_case.js":"../src/utils/title_case.js"}],"../src/product_chooser/next_button.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","../utils/title_case.js":"../src/utils/title_case.js","../utils/image_url.js":"../src/utils/image_url.js"}],"../src/product_chooser/next_button.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35214,6 +35248,8 @@ var _next_button = require("./next_button");
 
 var _reactRedux = require("react-redux");
 
+var _image_url = require("../utils/image_url");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ProductChoice = function ProductChoice(props) {
@@ -35224,9 +35260,15 @@ var ProductChoice = function ProductChoice(props) {
   var visibleSection = (0, _reactRedux.useSelector)(function (state) {
     return state.productChooser.visibleSection.order[state.productChooser.visibleSection.idx];
   });
+  var currentIdx = (0, _reactRedux.useSelector)(function (state) {
+    return state.productChooser.visibleSection.idx + 1;
+  });
   return /*#__PURE__*/_react.default.createElement("div", {
     className: visibleSection !== field.choice ? "invisible-option" : ""
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h3", null, field.title), /*#__PURE__*/_react.default.createElement("img", {
+    className: "progress-bar",
+    src: (0, _image_url.progressUrl)(currentIdx)
+  }), /*#__PURE__*/_react.default.createElement("div", {
     className: "option-set"
   }, field.options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_product_option.ProductOption, {
@@ -35245,7 +35287,7 @@ var ProductChoice = function ProductChoice(props) {
 };
 
 exports.ProductChoice = ProductChoice;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./product_option":"../src/product_chooser/product_option.jsx","./previous_button":"../src/product_chooser/previous_button.jsx","./reset_button":"../src/product_chooser/reset_button.jsx","./next_button":"../src/product_chooser/next_button.jsx","react-redux":"../node_modules/react-redux/es/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./product_option":"../src/product_chooser/product_option.jsx","./previous_button":"../src/product_chooser/previous_button.jsx","./reset_button":"../src/product_chooser/reset_button.jsx","./next_button":"../src/product_chooser/next_button.jsx","react-redux":"../node_modules/react-redux/es/index.js","../utils/image_url":"../src/utils/image_url.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -35312,7 +35354,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../styles/product_chooser.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../styles/product_chooser.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -35326,15 +35368,15 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _reactRedux = require("react-redux");
 
-var _fields = _interopRequireDefault(require("../../data/fields.json"));
+var _product_chooser_fields = _interopRequireDefault(require("../../data/product_chooser_fields.json"));
 
-var _store = _interopRequireDefault(require("../store.js"));
+var _store = _interopRequireDefault(require("../redux_store/store.js"));
 
 var _product_result = require("./product_result");
 
 var _product_choice = require("./product_choice");
 
-require("../../styles/product_chooser.css");
+require("../../styles/product_chooser.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35355,10 +35397,10 @@ if (mountNode) {
   _reactDom.default.render( /*#__PURE__*/_react.default.createElement(_reactRedux.Provider, {
     store: _store.default
   }, /*#__PURE__*/_react.default.createElement(ProductChooser, {
-    fields: _fields.default
+    fields: _product_chooser_fields.default
   })), mountNode);
 }
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","../../data/fields.json":"../data/fields.json","../store.js":"../src/store.js","./product_result":"../src/product_chooser/product_result.jsx","./product_choice":"../src/product_chooser/product_choice.jsx","../../styles/product_chooser.css":"../styles/product_chooser.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","../../data/product_chooser_fields.json":"../data/product_chooser_fields.json","../redux_store/store.js":"../src/redux_store/store.js","./product_result":"../src/product_chooser/product_result.jsx","./product_choice":"../src/product_chooser/product_choice.jsx","../../styles/product_chooser.scss":"../styles/product_chooser.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -35386,7 +35428,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40257" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38659" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

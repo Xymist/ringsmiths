@@ -28,7 +28,8 @@
     "flow-bin": "^0.133.0",
     "flow-typed": "^3.2.1",
     "parcel-bundler": "^1.12.4",
-    "redux-devtools": "^3.6.1"
+    "redux-devtools": "^3.6.1",
+    "sass": "^1.26.10"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",

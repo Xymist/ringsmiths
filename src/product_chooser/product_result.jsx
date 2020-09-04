@@ -7,6 +7,8 @@ import titleCase from "../utils/title_case";
 import { PreviousButton } from "./previous_button";
 import { FinaliseButton } from "./finalise_button";
 import { ResetButton } from "./reset_button";
+import { imageUrl } from "../utils/image_url";
+import { progressUrl } from "../utils/image_url";
 
 export const ProductResult = (props: any) => {
   const visibleSection = useSelector((state) => {
@@ -14,29 +16,35 @@ export const ProductResult = (props: any) => {
       state.productChooser.visibleSection.idx
     ];
   });
+  const currentIdx = useSelector((state) => {
+    return state.productChooser.visibleSection.idx + 1;
+  });
   const [carat, metal, style, width] = useSelector((state) => {
     return [
       state.productChooser.selections.carat,
-      state.productChooser.selections.metal || "yellow-gold",
-      state.productChooser.selections.style || "court",
-      state.productChooser.selections.width || "4mm",
+      titleCase(state.productChooser.selections.metal || "yellow-gold"),
+      titleCase(state.productChooser.selections.style || "court"),
+      titleCase(state.productChooser.selections.width || "4mm"),
     ];
   });
 
-  const specText = `Your chosen ring is a ${
-    carat ? carat + " " : ""
-  }${titleCase(metal)} ${titleCase(
-    style
-  )} wedding ring with a finger width of ${titleCase(width)}.`;
-
   return (
     <div className={visibleSection === "result" ? "" : " invisible-option"}>
+      <h3>Your perfect ring</h3>
+      <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
         <div className="spec-image product-option">
-          <img src={"noop"}></img>
+          <img
+            className="product-image"
+            src={imageUrl([style, metal, width].join("-"))}
+          ></img>
         </div>
         <div className="spec-text-container product-option">
-          <p className="spec-text">{specText}</p>
+          <h3>Your Perfect Ring</h3>
+          <p className="spec-text">
+            Your chosen ring is a {carat ? carat + " " : ""}
+            {metal} {style} wedding ring with a finger width of {width}.
+          </p>
           <p className="spec-text">
             We make your rings using recycled metals and only use recycled and
             recyclable packaging materials. When you purchase a ring from

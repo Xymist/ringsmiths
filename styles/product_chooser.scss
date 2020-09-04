@@ -11,6 +11,11 @@
     rgba(234, 235, 239, 0.45) 0%,
     rgb(255, 255, 255) 100%
   );
+  transition: all 0.2s ease-in-out;
+}
+
+.product-option:hover {
+  transform: scale(1.02);
 }
 
 .selected-option {
@@ -60,7 +65,7 @@ h3,
 .next-button,
 .previous-button,
 .reset-button {
-  font-family: "Quattrocento", Helvetica, Arial, Lucida, sans-serif !important;
+  font-family: "Quattrocento", Helvetica, Arial, Lucida, sans-serif;
 }
 
 #product-chooser-body {
@@ -96,6 +101,7 @@ a.next-button {
 
 .product-chooser-root {
   width: 80%;
+  height: 100%;
   margin: auto;
 }
 
@@ -105,4 +111,16 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
+}
+
+.progress-bar {
+  display: block;
+  width: 90%;
+  height: 30px;
+  margin: auto;
+}
+
+.product-image {
+  width: 80%;
+  margin: auto;
 }

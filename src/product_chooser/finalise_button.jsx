@@ -3,7 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useSelector } from "react-redux";
-import { productUrl } from "./product_chooser_slice";
+import { productUrl } from "../redux_store/product_chooser_slice";
 
 export const FinaliseButton = () => {
   const selectedUrl = useSelector(productUrl);

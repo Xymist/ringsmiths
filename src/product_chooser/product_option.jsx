@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import titleCase from "../utils/title_case.js";
+import { imageUrl } from "../utils/image_url.js";
 
 export const ProductOption = (props: any) => {
   const id = props.choice + "-" + props.option.value;
@@ -18,6 +19,17 @@ export const ProductOption = (props: any) => {
   const unavailable = unavailableOptions[props.choice].includes(
     props.option.value
   );
+  const imageData = [
+    props.choice === "style"
+      ? props.option.value
+      : selectedOptions.style || "court",
+    props.choice === "metal"
+      ? props.option.value
+      : selectedOptions.metal || "yellow-gold",
+    props.choice === "width"
+      ? props.option.value
+      : selectedOptions.width || "4mm",
+  ].join("-");
 
   return (
     <div
@@ -41,7 +53,7 @@ export const ProductOption = (props: any) => {
       }}
     >
       <h3>{titleCase(props.option.value)}</h3>
-      <img src="noop" style={{ width: "80%", margin: "auto" }}></img>
+      <img src={imageUrl(imageData)} className="product-image"></img>
     </div>
   );
 };
