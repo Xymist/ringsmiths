@@ -9,5 +9,6 @@
 all=warn
 
 [options]
+module.file_ext=.scss
 
 [strict]
