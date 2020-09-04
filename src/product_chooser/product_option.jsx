@@ -3,7 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
-import titleCase from "./title_case.js";
+import titleCase from "../utils/title_case.js";
 
 export const ProductOption = (props: any) => {
   const id = props.choice + "-" + props.option.value;

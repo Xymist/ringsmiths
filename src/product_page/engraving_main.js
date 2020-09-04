@@ -1,8 +1,8 @@
 // @flow
 
-import fonts from "../data/fonts.json";
+import fonts from "../../data/fonts.json";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   const engraving_option = document.getElementsByClassName(
     "wc-pao-addon-field wc-pao-addon-checkbox"
   )[0];

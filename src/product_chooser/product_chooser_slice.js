@@ -1,6 +1,6 @@
 // @flow
 
-import fields from "../data/fields.json";
+import fields from "../../data/fields.json";
 import { createSlice } from "@reduxjs/toolkit";
 import { stat } from "fs";
 
@@ -25,18 +25,15 @@ const defaultUnavailable = {
   style: [],
 };
 
-const defaultUrl = "#";
-
-const defaultSectionOrder = ["metal", "carat", "style", "width"];
+const defaultSectionOrder = ["metal", "carat", "style", "width", "result"];
 
 export const productChooserSlice = createSlice({
   name: "productChooser",
   initialState: {
     selections: defaultSelections,
     visibleOptions: defaultVisibleOptions,
-    visibleSection: defaultSectionOrder,
+    visibleSection: { order: defaultSectionOrder, idx: 0 },
     unavailable: defaultUnavailable,
-    url: defaultUrl,
   },
   reducers: {
     selectOption: (state, action) => {
@@ -62,13 +59,32 @@ export const productChooserSlice = createSlice({
       state.selections = defaultSelections;
       state.unavailable = defaultUnavailable;
       state.visibleOptions = defaultVisibleOptions;
-      state.visibleSection = defaultSectionOrder;
-      state.url = defaultUrl;
+      state.visibleSection = { order: defaultSectionOrder, idx: 0 };
     },
     nextChoice: (state) => {
-      state.visibleSection.shift();
-      while (state.visibleOptions[state.visibleSection[0]] === 0) {
-        state.visibleSection.shift();
+      if (state.visibleSection.idx === state.visibleSection.order.length - 1) {
+        return;
+      }
+      state.visibleSection.idx += 1;
+      while (
+        state.visibleOptions[
+          state.visibleSection.order[state.visibleSection.idx]
+        ] === 0
+      ) {
+        state.visibleSection.idx += 1;
+      }
+    },
+    previousChoice: (state) => {
+      if (state.visibleSection.idx === 0) {
+        return;
+      }
+      state.visibleSection.idx -= 1;
+      while (
+        state.visibleOptions[
+          state.visibleSection.order[state.visibleSection.idx]
+        ] === 0
+      ) {
+        state.visibleSection.idx -= 1;
       }
     },
   },

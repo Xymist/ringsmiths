@@ -1,7 +1,7 @@
 // @flow
 
 import fields from "../data/fields.json";
-import titleCase from "./title_case.js";
+import titleCase from "../src/utils/title_case.js";
 import _ from "../styles/product_chooser.css";
 
 let selections = {};
@@ -53,28 +53,6 @@ const updateImageSrc = (elem) => {
   }
 };
 
-// Get all attribute selectors, find their images and update
-// them to use the latest selections or defaults.
-const updateImages = () => {
-  [...document.getElementsByClassName("ring-attribute-selector")].forEach(
-    (selector) => {
-      updateImageSrc(selector);
-    }
-  );
-};
-
-const setSpecText = (carat, metal, style, width) => {
-  const target = document.getElementById("spec-text");
-
-  if (target) {
-    target.innerHTML = `Your chosen ring is a ${
-      carat ? carat + " " : ""
-    }${titleCase(metal)} ${titleCase(
-      style
-    )} wedding ring with a finger width of ${width}.`;
-  }
-};
-
 const setSpecImage = (metal, style, width) => {
   const target = document.getElementById("spec-image");
   let selected = [style || "court", metal || "yellow-gold", width || "4mm"];
@@ -103,17 +81,14 @@ const updateSpec = () => {
     return;
   }
 
-  setSpecText(carat, metal, style, width);
   setSpecImage(metal, style, width);
 };
 
 // Entrypoint for the product chooser logic
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   [...document.getElementsByClassName("ring-attribute-selector")].forEach(
     (selector) => {
       selector.onclick = () => {
-        updateUrlData(selector);
-        updateImages();
         updateSpec();
       };
     }
