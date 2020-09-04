@@ -1,0 +1,7 @@
+# README
+
+- Ensure you have an up to date version of NPM installed
+- Run `npm install` to fetch dependencies
+- Run `npm run dev` to run a local dev server on `localhost:1234`
+- Run `npm run build` to build the production copies of the CSS and JS files, so that they can be run on the site
+- Before making a PR, ensure you have run the production build and committed the results
