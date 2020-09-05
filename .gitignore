@@ -1,3 +1,11 @@
+# Big stuff we don't need
 .cache/
 node_modules/
+
+# Lockfiles
 package-lock.json
+
+# Dev build stuff
+dist/*.css
+dist/*.html
+dist/*.js
