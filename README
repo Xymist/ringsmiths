@@ -1,8 +1,12 @@
 # README
 
+## To develop
 - Ensure you have an up to date version of NPM installed
 - Run `npm install` to fetch dependencies
 - Run `npm run dev` to run a local dev server on `localhost:1234`. This will autoupdate on changed to the source files
+
+## To publish/push
 - Run `npm run build` to build the production copies of the CSS and JS files, so that they can be run on the site
-- Before making a PR, ensure you have run the production build and committed the results
-- Do not commit dev tempfiles to git, e.g. `/dist/product_chooser_main.1a2b3c4d.js`
+- Before making a PR, commit the results of the previous step and push with `git push origin branch_name`
+- On the PR, assign appropriate users, labels, tags and milestones. Include links to any affected issues,
+  which can be done by starting a line with "Closes #"; available ticket IDs will appear after the octothorpe.
