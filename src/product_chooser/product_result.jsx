@@ -30,7 +30,7 @@ export const ProductResult = (props: any) => {
 
   return (
     <div className={visibleSection === "result" ? "" : " invisible-option"}>
-      <h3>Your perfect ring</h3>
+      <h3 className="spec-title">Your perfect ring</h3>
       <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
         <div className="spec-image product-option">
