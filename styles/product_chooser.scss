@@ -8,7 +8,7 @@ h2,
 h3,
 .next-button,
 .previous-button,
-.reset-button, .spec-text {
+.reset-button, .spec-text, .spec-text20, .spec-text15 {
   font-family: "Quattrocento Sans", Helvetica, Arial, Lucida, sans-serif;
 }
 
@@ -65,6 +65,13 @@ h3,
   text-align: center;
 }
 
+.section-button-center {
+  width: 33%;
+  text-align: center;
+  margin: auto;
+  padding: 10px 0;
+}
+
 .next-button,
 .previous-button,
 .reset-button {
@@ -113,16 +120,30 @@ a.next-button {
   display: block;
   width: 40%;
   max-width: 100%;
+  height: 333px;
 }
 
 .spec-text-container {
   display: block;
   width: 60%;
   max-width: 100%;
+  height: 333px;
 }
 
 .spec-text {
   margin: 1.1em;
+}
+
+.spec-text15 {
+  margin: 1.1em;
+  line-height: 1.4em;
+  font-size: 17px;
+}
+
+.spec-text20 {
+  margin: 1.1em;
+  line-height: 1.4em;
+  font-size: 24px;
 }
 
 .product-chooser-root {
@@ -147,7 +168,7 @@ body,
   padding: 20px 0;
 }
 
-.product-image {
-  width: 80%;
+.spec-image > .product-image {
+  height: 333px;
   margin: auto;
 }
