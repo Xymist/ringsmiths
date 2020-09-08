@@ -45,9 +45,10 @@ h3,
   font-family: "Quattrocento", Helvetica, Arial, Lucida, sans-serif;
   font-size: 30px;
   color: #333;
-  padding-bottom: 10px;
+  padding: 20px 0;
   line-height: 1em;
   font-weight: 500;
+  margin: 0px;
 }
 
 .selected-option {
@@ -111,11 +112,13 @@ a.next-button {
 .spec-image {
   display: block;
   width: 40%;
+  max-width: 100%;
 }
 
 .spec-text-container {
   display: block;
   width: 60%;
+  max-width: 100%;
 }
 
 .spec-text {
@@ -141,6 +144,7 @@ body,
   width: 90%;
   height: 30px;
   margin: auto;
+  padding: 20px 0;
 }
 
 .product-image {
