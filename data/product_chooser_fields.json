@@ -1,0 +1,112 @@
+[
+  {
+    "choice": "metal",
+    "title": "Let's get started",
+    "options": [
+      {
+        "value": "yellow-gold",
+        "excl_attrs": []
+      },
+      {
+        "value": "white-gold",
+        "excl_attrs": []
+      },
+      {
+        "value": "rose-gold",
+        "excl_attrs": [
+          {
+            "attr": "width",
+            "exclusions": ["6mm", "8mm", "2.5mm"]
+          }
+        ]
+      },
+      {
+        "value": "platinum",
+        "excl_attrs": [{ "attr": "carat", "exclusions": ["9ct", "18ct"] }]
+      },
+      {
+        "value": "titanium",
+        "excl_attrs": [
+          { "attr": "width", "exclusions": ["2mm", "2.5mm", "3mm"] },
+          { "attr": "carat", "exclusions": ["9ct", "18ct"] }
+        ]
+      }
+    ]
+  },
+  {
+    "choice": "carat",
+    "title": "Now let's choose a carat",
+    "options": [
+      {
+        "value": "9ct",
+        "excl_attrs": [
+          { "attr": "metal", "exclusions": ["titanium", "platinum"] }
+        ]
+      },
+      {
+        "value": "18ct",
+        "excl_attrs": [
+          { "attr": "metal", "exclusions": ["titanium", "platinum"] }
+        ]
+      }
+    ]
+  },
+  {
+    "choice": "style",
+    "title": "Now let's choose a style",
+    "options": [
+      {
+        "value": "flat",
+        "excl_attrs": []
+      },
+      {
+        "value": "easy-fit",
+        "excl_attrs": []
+      },
+      {
+        "value": "court",
+        "excl_attrs": []
+      },
+      {
+        "value": "d-shape",
+        "excl_attrs": []
+      }
+    ]
+  },
+  {
+    "choice": "width",
+    "title": "Pick your width",
+    "options": [
+      {
+        "value": "2mm",
+        "excl_attrs": [{ "attr": "metal", "exclusions": ["titanium"] }]
+      },
+      {
+        "value": "2-5mm",
+        "excl_attrs": [
+          { "attr": "metal", "exclusions": ["rose-gold", "titanium"] }
+        ]
+      },
+      {
+        "value": "3mm",
+        "excl_attrs": [{ "attr": "metal", "exclusions": ["titanium"] }]
+      },
+      {
+        "value": "4mm",
+        "excl_attrs": []
+      },
+      {
+        "value": "5mm",
+        "excl_attrs": []
+      },
+      {
+        "value": "6mm",
+        "excl_attrs": [{ "attr": "metal", "exclusions": ["rose-gold"] }]
+      },
+      {
+        "value": "8mm",
+        "excl_attrs": [{ "attr": "metal", "exclusions": ["rose-gold"] }]
+      }
+    ]
+  }
+]
