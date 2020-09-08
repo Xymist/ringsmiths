@@ -9,9 +9,9 @@ export const FinaliseButton = () => {
   const selectedUrl = useSelector(productUrl);
   return (
     <div className="section-button">
-      <a className="next-button" href={selectedUrl}>
-        Find out more about your perfect ring
-      </a>
+      <button className="next-button" href={selectedUrl}>
+        Buy my perfect ring
+      </button>
     </div>
   );
 };

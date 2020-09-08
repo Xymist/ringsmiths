@@ -25,7 +25,7 @@ export const ProductChoice = (props: any) => {
 
   return (
     <div className={visibleSection !== field.choice ? "invisible-option" : ""}>
-      <h3>{field.title}</h3>
+      <h3 className="section-title">{field.title}</h3>
       <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
         {field.options.map((option) => {
