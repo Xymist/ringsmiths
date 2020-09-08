@@ -33,7 +33,7 @@ export const ProductResult = (props: any) => {
       <h3 className="spec-title">Your perfect ring</h3>
       <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
-        <div className="spec-image product-option">
+        <div className="spec-image-final product-option">
           <img
             className="product-image"
             src={imageUrl([style, metal, width].join("-"))}
