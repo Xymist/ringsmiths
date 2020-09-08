@@ -22,9 +22,9 @@ export const ProductResult = (props: any) => {
   const [carat, metal, style, width] = useSelector((state) => {
     return [
       state.productChooser.selections.carat,
-      titleCase(state.productChooser.selections.metal || "yellow-gold"),
-      titleCase(state.productChooser.selections.style || "court"),
-      titleCase(state.productChooser.selections.width || "4mm"),
+      state.productChooser.selections.metal || "yellow-gold",
+      state.productChooser.selections.style || "court",
+      state.productChooser.selections.width || "4mm",
     ];
   });
 
@@ -42,8 +42,9 @@ export const ProductResult = (props: any) => {
         <div className="spec-text-container product-option">
           <h3>Your Perfect Ring</h3>
           <p className="spec-text">
-            Your chosen ring is a {carat ? carat + " " : ""}
-            {metal} {style} wedding ring with a finger width of {width}.
+            Your chosen ring is a {carat ? titleCase(carat) + " " : ""}
+            {titleCase(metal)} {titleCase(style)} wedding ring with a finger
+            width of {titleCase(width)}.
           </p>
           <p className="spec-text">
             We make your rings using recycled metals and only use recycled and
