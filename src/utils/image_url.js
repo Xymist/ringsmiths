@@ -1,7 +1,7 @@
 // @flow
 
 export const imageUrl = (key: string) => {
-  return "/wp-content/uploads/2020/08/" + key + ".jpg";
+  return "/wp-content/uploads/" + key + ".jpg";
 };
 
 export const progressUrl = (stage: Number) => {
