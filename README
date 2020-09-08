@@ -7,10 +7,11 @@
 
 ## To develop
 
-- If you have the base branch on your local already
+- If you have the base branch (the branch which currently contains the latest state from
+  which you want to begin; usually `development` but not always) on your local already:
   - `git checkout base_branch_name`
   - `git pull origin base_branch_name`
-- Or, if you DO NOT have the base branch on your local already
+- Or, if you DO NOT have the base branch on your local already:
   - `git fetch origin base_branch_name`
   - `git checkout base_branch_name
 - `git checkout -b new_branch_name`, where the new name is a branch name you haven't used before
@@ -24,7 +25,7 @@
 - `npm run build` to build the production copies of the CSS and JS files, so that they can be run on the site
 - `git add .` to add any new local files to the Git tracker
 - `git commit -am "This is a descriptive message"` to commit all current changes and any new files added in the previous step
-- If this is a version that needs to be found by JSDelivr
+- If this is a version that needs to be found by JSDelivr:
   - `git tag 'vx.x.x.x'` with appropriate Xs for the version number you intend.
 - `git push origin new_branch_name --tags` to get it onto GitHub
 - Open a PR, assign appropriate users, labels, project and milestones. Include links to any affected issues,
