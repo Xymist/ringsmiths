@@ -36,6 +36,7 @@ h3,
 .product-option > h3 { 
   text-align: center;
   margin: 0 0 20px 0;
+  padding-bottom: 0px;
   color: #333;
   line-height: 1em;
   font-weight: 500;
@@ -179,6 +180,7 @@ body,
 }
 
 .product-image {
-  height: 200px;
+  max-height: 100%;
+  max-width: 100%;
   margin: auto;
 }
