@@ -35,7 +35,7 @@ h3,
 
 .product-option > h3 { 
   text-align: center;
-  margin: 0 0 20 0px;
+  margin: 0 0 20px 0;
   color: #333;
   line-height: 1em;
   font-weight: 500;
@@ -142,13 +142,11 @@ a.next-button {
 }
 
 .spec-text15 {
-  margin: 1.1em;
   line-height: 1.4em;
   font-size: 17px;
 }
 
 .spec-text20 {
-  margin: 1.1em;
   line-height: 1.4em;
   font-size: 24px;
 }
@@ -177,5 +175,10 @@ body,
 
 .spec-image-final > .product-image {
   height: 333px;
+  margin: auto;
+}
+
+.product-image {
+  height: 200px;
   margin: auto;
 }
