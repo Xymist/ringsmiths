@@ -32,7 +32,7 @@ export const productChooserSlice = createSlice({
   initialState: {
     selections: defaultSelections,
     visibleOptions: defaultVisibleOptions,
-    visibleSection: { order: defaultSectionOrder, idx: 0 },
+    visibleSection: { order: defaultSectionOrder, idx: 0, option_idx: 0 },
     unavailable: defaultUnavailable,
   },
   reducers: {
@@ -59,7 +59,11 @@ export const productChooserSlice = createSlice({
       state.selections = defaultSelections;
       state.unavailable = defaultUnavailable;
       state.visibleOptions = defaultVisibleOptions;
-      state.visibleSection = { order: defaultSectionOrder, idx: 0 };
+      state.visibleSection = {
+        order: defaultSectionOrder,
+        idx: 0,
+        option_idx: 0,
+      };
     },
     nextChoice: (state) => {
       if (state.visibleSection.idx === state.visibleSection.order.length - 1) {
@@ -71,8 +75,12 @@ export const productChooserSlice = createSlice({
           state.visibleSection.order[state.visibleSection.idx]
         ] === 0
       ) {
+        // Increment the section we're observing
         state.visibleSection.idx += 1;
       }
+      // Display the first option in that section,
+      // if we're showing one at a time
+      state.visibleSection.option_idx = 0;
     },
     previousChoice: (state) => {
       if (state.visibleSection.idx === 0) {
@@ -84,11 +92,62 @@ export const productChooserSlice = createSlice({
           state.visibleSection.order[state.visibleSection.idx]
         ] === 0
       ) {
+        // Decrement the section we're observing
         state.visibleSection.idx -= 1;
       }
+
+      const chosen_index = chosenIndex(state);
+
+      // Display the currently selected option,
+      // if we're showing one at a time
+      if (chosen_index === -1) {
+        state.visibleSection.option_idx = 0;
+      } else {
+        state.visibleSection.option_idx = chosen_index;
+      }
+    },
+    nextOption: (state) => {
+      if (state.visibleSection.option_idx + 1 < choiceWidth(state)) {
+        state.visibleSection.option_idx += 1;
+      }
+    },
+    previousOption: (state) => {
+      if (state.visibleSection.option_idx === 0) {
+        return;
+      }
+      state.visibleSection.option_idx -= 1;
     },
   },
 });
+
+const choiceWidth = (state) => {
+  const field = currentField(state);
+  if (field) {
+    return field.options.length;
+  }
+  // This should never happen, but this is JS so who knows?
+  return 0;
+};
+
+const chosenIndex = (state) => {
+  let chosen_index = -1;
+  const field = currentField(state);
+  if (field) {
+    chosen_index = field.options.findIndex((o) => {
+      return (
+        o.value ===
+        state.selections[state.visibleSection.order[state.visibleSection.idx]]
+      );
+    });
+  }
+  return chosen_index;
+};
+
+const currentField = (state) => {
+  return fields.find((f) => {
+    return f.choice === state.visibleSection.order[state.visibleSection.idx];
+  });
+};
 
 // Fetch the pieces we want from the selections object; anything we don't want
 // will be null or undefined, and will be removed by the filter
