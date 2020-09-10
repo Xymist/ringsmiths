@@ -107,15 +107,46 @@ export const productChooserSlice = createSlice({
       }
     },
     nextOption: (state) => {
-      if (state.visibleSection.option_idx + 1 < choiceWidth(state)) {
-        state.visibleSection.option_idx += 1;
+      const cf = currentField(state);
+      let n = 1;
+
+      // If we're already at the end, just give up immediately
+      // If we're not at the end and the next option is available,
+      // move to the next option.
+      // If we're not at the end and the next option is not available,
+      // increment the skip count and see if the one after that is available
+      while (state.visibleSection.option_idx + n !== choiceWidth(state)) {
+        if (
+          !state.unavailable[cf.choice].includes(
+            cf.options[state.visibleSection.option_idx + n].value
+          )
+        ) {
+          state.visibleSection.option_idx += n;
+          break;
+        }
+        n += 1;
       }
     },
     previousOption: (state) => {
-      if (state.visibleSection.option_idx === 0) {
-        return;
+      const cf = currentField(state);
+      let n = 1;
+
+      // If we're already at the beginning, just give up immediately
+      // If we're not at the beginning and the previous option is available,
+      // move to the previous option.
+      // If we're not at the beginning and the previous option is not available,
+      // increment the skip count and see if the one before that is available
+      while (state.visibleSection.option_idx - n !== -1) {
+        if (
+          !state.unavailable[cf.choice].includes(
+            cf.options[state.visibleSection.option_idx - n].value
+          )
+        ) {
+          state.visibleSection.option_idx -= n;
+          break;
+        }
+        n += 1;
       }
-      state.visibleSection.option_idx -= 1;
     },
   },
 });

@@ -11,11 +11,6 @@ import { imageUrl } from "../utils/image_url";
 import { progressUrl } from "../utils/image_url";
 
 export const ProductResult = (props: any) => {
-  const visibleSection = useSelector((state) => {
-    return state.productChooser.visibleSection.order[
-      state.productChooser.visibleSection.idx
-    ];
-  });
   const currentIdx = useSelector((state) => {
     return state.productChooser.visibleSection.idx + 1;
   });
@@ -29,7 +24,7 @@ export const ProductResult = (props: any) => {
   });
 
   return (
-    <div className={visibleSection === "result" ? "" : " invisible-option"}>
+    <div>
       <h3 className="spec-title">Your perfect ring</h3>
       <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
@@ -41,9 +36,12 @@ export const ProductResult = (props: any) => {
         </div>
         <div className="spec-text-container product-option">
           <p className="spec-text20">
-            Your chosen ring is a <b>{carat ? titleCase(carat) + " " : ""}
-            {titleCase(metal)} {titleCase(style)}</b> wedding ring with a finger
-            width of <b>{titleCase(width)}</b>.
+            Your chosen ring is a{" "}
+            <b>
+              {carat ? titleCase(carat) + " " : ""}
+              {titleCase(metal)} {titleCase(style)}
+            </b>{" "}
+            wedding ring with a finger width of <b>{titleCase(width)}</b>.
           </p>
           <p className="spec-text15">
             We make your rings using recycled metals and only use recycled and
