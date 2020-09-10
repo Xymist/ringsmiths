@@ -53,14 +53,14 @@ export const MobileProductOption = (props: any) => {
         if (!canceled) {
           cancel();
           dispatch({
-            type: "productChooser/nextOption",
+            type: "productChooser/previousOption",
           });
         }
       } else if (mx < -boundary) {
         if (!canceled) {
           cancel();
           dispatch({
-            type: "productChooser/previousOption",
+            type: "productChooser/nextOption",
           });
         }
       }
