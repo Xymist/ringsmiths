@@ -38,26 +38,26 @@ export const MobileProductOption = (props: any) => {
   const bind = useDrag(
     ({ down, movement: [mx], tap, cancel, canceled }) => {
       set({ x: down ? mx : 0 });
-      if (tap) {
-        dispatch({
-          type: "productChooser/selectOption",
-          payload: {
-            field: props.choice,
-            value: props.option.value,
-          },
-        });
-        dispatch({
-          type: "productChooser/nextChoice",
-        });
-      } else if (mx > boundary) {
-        if (!canceled) {
+
+      if (!canceled) {
+        if (tap) {
+          cancel();
+          dispatch({
+            type: "productChooser/selectOption",
+            payload: {
+              field: props.choice,
+              value: props.option.value,
+            },
+          });
+          dispatch({
+            type: "productChooser/nextChoice",
+          });
+        } else if (mx > boundary) {
           cancel();
           dispatch({
             type: "productChooser/previousOption",
           });
-        }
-      } else if (mx < -boundary) {
-        if (!canceled) {
+        } else if (mx < -boundary) {
           cancel();
           dispatch({
             type: "productChooser/nextOption",
