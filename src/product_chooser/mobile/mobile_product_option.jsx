@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { imageUrl } from "../../utils/image_url.js";
 import { useDrag } from "react-use-gesture";
 import titleCase from "../../utils/title_case";
-import { CANCELLED } from "dns";
 
 export const MobileProductOption = (props: any) => {
   const boundary = 100;
@@ -16,17 +15,6 @@ export const MobileProductOption = (props: any) => {
   const selectedOptions = useSelector((state) => {
     return state.productChooser.selections;
   });
-  const imageData = [
-    props.choice === "style"
-      ? props.option.value
-      : selectedOptions.style || "court",
-    props.choice === "metal"
-      ? props.option.value
-      : selectedOptions.metal || "yellow-gold",
-    props.choice === "width"
-      ? props.option.value
-      : selectedOptions.width || "4mm",
-  ].join("-");
 
   const [{ x }, set] = useSpring(() => ({ x: 0 }));
   // If we detect a swipe to the left, display the
@@ -80,7 +68,10 @@ export const MobileProductOption = (props: any) => {
 
   return (
     <animated.div {...bind()} style={{ x }}>
-      <img src={imageUrl(imageData)} className="product-image"></img>
+      <img
+        src={imageUrl(props, selectedOptions)}
+        className="product-image"
+      ></img>
       <h3>{titleCase(props.option.value)}</h3>
     </animated.div>
   );

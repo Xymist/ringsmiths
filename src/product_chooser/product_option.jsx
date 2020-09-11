@@ -19,17 +19,6 @@ export const ProductOption = (props: any) => {
   const unavailable = unavailableOptions[props.choice].includes(
     props.option.value
   );
-  const imageData = [
-    props.choice === "style"
-      ? props.option.value
-      : selectedOptions.style || "court",
-    props.choice === "metal"
-      ? props.option.value
-      : selectedOptions.metal || "yellow-gold",
-    props.choice === "width"
-      ? props.option.value
-      : selectedOptions.width || "4mm",
-  ].join("-");
 
   return (
     <div
@@ -53,7 +42,10 @@ export const ProductOption = (props: any) => {
       }}
     >
       <h3>{titleCase(props.option.value)}</h3>
-      <img src={imageUrl(imageData)} className="product-image"></img>
+      <img
+        src={imageUrl(props, selectedOptions)}
+        className="product-image"
+      ></img>
     </div>
   );
 };
