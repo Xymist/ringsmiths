@@ -80,7 +80,26 @@ export const productChooserSlice = createSlice({
       }
       // Display the first option in that section,
       // if we're showing one at a time
-      state.visibleSection.option_idx = 0;
+      state.visibleSection.option_idx = -1;
+      const cf = currentField(state);
+      let n = 1;
+
+      // If we're already at the end, just give up immediately
+      // If we're not at the end and the next option is available,
+      // move to the next option.
+      // If we're not at the end and the next option is not available,
+      // increment the skip count and see if the one after that is available
+      while (state.visibleSection.option_idx + n !== choiceWidth(state)) {
+        if (
+          !state.unavailable[cf.choice].includes(
+            cf.options[state.visibleSection.option_idx + n].value
+          )
+        ) {
+          state.visibleSection.option_idx += n;
+          break;
+        }
+        n += 1;
+      }
     },
     previousChoice: (state) => {
       if (state.visibleSection.idx === 0) {
