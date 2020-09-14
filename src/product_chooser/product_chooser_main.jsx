@@ -8,14 +8,38 @@ import store from "../redux_store/store.js";
 import { ProductResult } from "./product_result";
 import { ProductChoice } from "./product_choice";
 import "../../styles/product_chooser.scss";
+import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
+import { MobileProductChoice } from "./mobile/mobile_product_choice";
+import { MobileProductResult } from "./mobile/mobile_product_result";
 
 const ProductChooser = (props) => {
+  const stupidTinyScreen = useMediaQuery({ query: "(max-width: 1224px)" });
+  const visibleSection = useSelector((state) => {
+    return state.productChooser.visibleSection.order[
+      state.productChooser.visibleSection.idx
+    ];
+  });
+  const visibleField = useSelector((state) => {
+    return fields.find((f) => {
+      return f.choice === visibleSection;
+    });
+  });
+  const resultPage = visibleSection === "result";
+
   return (
     <div className="product-chooser-root">
-      {props.fields.map((field) => {
-        return <ProductChoice field={field} key={field.choice}></ProductChoice>;
-      })}
-      <ProductResult></ProductResult>
+      {stupidTinyScreen ? (
+        resultPage ? (
+          <MobileProductResult></MobileProductResult>
+        ) : (
+          <MobileProductChoice field={visibleField}></MobileProductChoice>
+        )
+      ) : resultPage ? (
+        <ProductResult></ProductResult>
+      ) : (
+        <ProductChoice field={visibleField}></ProductChoice>
+      )}
     </div>
   );
 };

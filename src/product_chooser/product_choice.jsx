@@ -14,17 +14,12 @@ export const ProductChoice = (props: any) => {
   const optionCount = useSelector((state) => {
     return state.productChooser.visibleOptions[field.choice];
   });
-  const visibleSection = useSelector((state) => {
-    return state.productChooser.visibleSection.order[
-      state.productChooser.visibleSection.idx
-    ];
-  });
   const currentIdx = useSelector((state) => {
     return state.productChooser.visibleSection.idx + 1;
   });
 
   return (
-    <div className={visibleSection !== field.choice ? "invisible-option" : ""}>
+    <div>
       <h3 className="section-title">{field.title}</h3>
       <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">

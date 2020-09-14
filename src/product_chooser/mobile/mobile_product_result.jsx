@@ -2,18 +2,14 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { useSelector, useDispatch } from "react-redux";
-import titleCase from "../utils/title_case";
-import { PreviousButton } from "./previous_button";
-import { FinaliseButton } from "./finalise_button";
-import { ResetButton } from "./reset_button";
-import { imageUrl } from "../utils/image_url";
-import { progressUrl } from "../utils/image_url";
+import { useSelector } from "react-redux";
+import { imageUrl } from "../../utils/image_url";
+import titleCase from "../../utils/title_case";
+import { PreviousButton } from "../previous_button";
+import { ResetButton } from "../reset_button";
+import { FinaliseButton } from "../finalise_button";
 
-export const ProductResult = (props: any) => {
-  const currentIdx = useSelector((state) => {
-    return state.productChooser.visibleSection.idx + 1;
-  });
+export const MobileProductResult = (props: any) => {
   const [carat, metal, style, width] = useSelector((state) => {
     return [
       state.productChooser.selections.carat,
@@ -26,7 +22,6 @@ export const ProductResult = (props: any) => {
   return (
     <div>
       <h3 className="spec-title">Your perfect ring</h3>
-      <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
         <div className="spec-image-final product-option">
           <img
@@ -42,16 +37,6 @@ export const ProductResult = (props: any) => {
               {titleCase(metal)} {titleCase(style)}
             </b>{" "}
             wedding ring with a finger width of <b>{titleCase(width)}</b>.
-          </p>
-          <p className="spec-text15">
-            We make your rings using recycled metals and only use recycled and
-            recyclable packaging materials. When you purchase a ring from
-            Ringsmiths, we go the extra mile to create something just for you.
-          </p>
-          <p className="spec-text15">
-            To find out more about your perfect ring such as price,
-            customisation options and to order a free eco-friendly sample of
-            your ring, click on the button below.
           </p>
           <FinaliseButton></FinaliseButton>
         </div>
