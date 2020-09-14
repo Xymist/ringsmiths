@@ -35,7 +35,12 @@ const imageData = (props, selectedOptions) => {
 };
 
 export const imageUrl = (props: any, selectedOptions: any) => {
-  const key = imageData(props, selectedOptions);
+  let key;
+  if (selectedOptions) {
+    key = imageData(props, selectedOptions);
+  } else {
+    key = props.join("-");
+  }
   return "/wp-content/uploads/" + key + ".jpg";
 };
 

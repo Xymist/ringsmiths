@@ -31,7 +31,7 @@ export const ProductResult = (props: any) => {
         <div className="spec-image-final product-option">
           <img
             className="product-image"
-            src={imageUrl([style, metal, width].join("-"))}
+            src={imageUrl([style, metal, width])}
           ></img>
         </div>
         <div className="spec-text-container product-option">
