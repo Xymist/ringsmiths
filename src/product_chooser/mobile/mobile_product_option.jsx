@@ -67,7 +67,7 @@ export const MobileProductOption = (props: any) => {
   );
 
   return (
-    <animated.div {...bind()} style={{ x }}>
+    <animated.div {...bind()} style={{ x }} className="mobile-card">
       <img
         src={imageUrl(props, selectedOptions)}
         className="product-image"
