@@ -182,8 +182,21 @@ body,
   height: 200px;
   margin: auto;
 }
-.mobile-card {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 5px;
+
+
+// For Mobile Styling
+@media only screen and (max-width: 780px) {
+
+
+  .mobile-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .mobile-h3 {
+    text-align: center;
+    padding-top: 10%;
+}
+
+
 }

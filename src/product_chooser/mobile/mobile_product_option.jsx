@@ -72,7 +72,7 @@ export const MobileProductOption = (props: any) => {
         src={imageUrl(props, selectedOptions)}
         className="product-image"
       ></img>
-      <h3>{titleCase(props.option.value)}</h3>
+      <h3 className="mobile-h3">{titleCase(props.option.value)}</h3>
     </animated.div>
   );
 };
