@@ -184,8 +184,9 @@ body,
 }
 
 
-// For Mobile Styling
-@media only screen and (max-width: 780px) {
+/* For Mobile Styling */
+
+@media screen and (max-width: 780px) {
 
 
   .mobile-card {
@@ -196,18 +197,17 @@ body,
   .mobile-h3 {
     text-align: center;
     padding-top: 10%;
-
+  }
   .section-title, .spec-title {
     font-family: "Quattrocento", Helvetica, Arial, Lucida, sans-serif;
-    font-size: 30px;
+    font-size: 50px;
     color: #333;
     padding: 20px 0;
     line-height: 1em;
     font-weight: 500;
     margin: 0px;
     text-align: center;
-  }   
+  }
 }
 
 
-}
