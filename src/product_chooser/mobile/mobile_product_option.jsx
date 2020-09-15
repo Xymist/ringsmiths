@@ -68,7 +68,7 @@ export const MobileProductOption = (props: any) => {
 
   return (
     <>
-      <img
+      <img className="arrow-left"
         src={imageUrl(["previous-rs"], null, ".png")}
         onClick={() => {
           dispatch({
@@ -83,8 +83,8 @@ export const MobileProductOption = (props: any) => {
         ></img>
         <h3 className="mobile-h3">{titleCase(props.option.value)}</h3>
       </animated.div>
-      <img
-        src={imageUrl(["next-rs"], null, ".png")}
+      <img className="arrow-right"
+        src={imageUrl(["next-RS"], null, ".png")}
         onClick={() => {
           dispatch({
             type: "productChooser/nextOption",
