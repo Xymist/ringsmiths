@@ -34,14 +34,18 @@ const imageData = (props, selectedOptions) => {
   return relevantOpts.join("-");
 };
 
-export const imageUrl = (props: any, selectedOptions: any) => {
+export const imageUrl = (
+  props: any,
+  selectedOptions: any,
+  extension = ".jpg"
+) => {
   let key;
   if (selectedOptions) {
     key = imageData(props, selectedOptions);
   } else {
     key = props.join("-");
   }
-  return "/wp-content/uploads/" + key + ".jpg";
+  return "/wp-content/uploads/" + key + extension;
 };
 
 export const progressUrl = (stage: Number) => {

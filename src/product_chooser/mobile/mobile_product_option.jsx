@@ -67,12 +67,30 @@ export const MobileProductOption = (props: any) => {
   );
 
   return (
-    <animated.div {...bind()} style={{ x }}>
+    <>
       <img
-        src={imageUrl(props, selectedOptions)}
-        className="product-image"
+        src={imageUrl(["previous-rs"], null, ".png")}
+        onClick={() => {
+          dispatch({
+            type: "productChooser/previousOption",
+          });
+        }}
+      ></img>
+      <animated.div {...bind()} style={{ x }}>
+        <img
+          src={imageUrl(props, selectedOptions)}
+          className="product-image"
+        ></img>
+      </animated.div>
+      <img
+        src={imageUrl(["next-rs"], null, ".png")}
+        onClick={() => {
+          dispatch({
+            type: "productChooser/nextOption",
+          });
+        }}
       ></img>
       <h3>{titleCase(props.option.value)}</h3>
-    </animated.div>
+    </>
   );
 };
