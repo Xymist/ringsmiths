@@ -9,17 +9,18 @@ import { ResetButton } from "../reset_button";
 
 export const MobileProductChoice = (props: any) => {
   const field = props.field;
-  const optionIdx = useSelector((state) => {
-    return state.productChooser.visibleSection.option_idx;
-  });
-  const option = field.options[optionIdx];
   return (
     <div>
       <h3 className="section-title">{field.title}</h3>
-      <MobileProductOption
-        choice={field.choice}
-        option={option}
-      ></MobileProductOption>
+      {field.options.map((option) => {
+        return (
+          <MobileProductOption
+            choice={field.choice}
+            option={option}
+            key={option.value}
+          ></MobileProductOption>
+        );
+      })}
       <div className="section-footer">
         <PreviousButton choice={field.choice}></PreviousButton>
         <ResetButton></ResetButton>
