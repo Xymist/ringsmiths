@@ -12,15 +12,17 @@ export const MobileProductChoice = (props: any) => {
   return (
     <div>
       <h3 className="section-title">{field.title}</h3>
-      {field.options.map((option) => {
-        return (
-          <MobileProductOption
-            choice={field.choice}
-            option={option}
-            key={option.value}
-          ></MobileProductOption>
-        );
-      })}
+        <div className="container-mobile-scroll">
+          {field.options.map((option) => {
+            return (
+              <MobileProductOption
+                choice={field.choice}
+                option={option}
+                key={option.value}
+              ></MobileProductOption>
+            );
+          })}
+        </div>
       <div className="section-footer">
         <PreviousButton choice={field.choice}></PreviousButton>
         <ResetButton></ResetButton>
