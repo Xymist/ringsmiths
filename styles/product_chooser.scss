@@ -12,6 +12,7 @@ h3,
   font-family: "Quattrocento Sans", Helvetica, Arial, Lucida, sans-serif;
 }
 
+// Creates the box for the product to sit in.
 .product-option {
   text-align: center;
   margin: 1.2em;
@@ -111,10 +112,12 @@ a.next-button {
   margin-top: 15px;
 }
 
+// Sets the containing div for .product-option
 .option-set {
   display: flex;
   justify-content: space-evenly;
 }
+
 
 .spec-image {
   display: block;
