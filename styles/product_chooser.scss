@@ -30,6 +30,25 @@ h3,
 
 }
 
+@media screen and (max-width: 600px) {
+  .product-option {
+  text-align: center;
+  margin: 1.2em;
+  color: #333;
+  padding: 20px;
+  line-height: 1em;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 12px 8px -15px rgba(0,0,0,0.3);
+  max-width: 250px;
+  height: 100%;
+  overflow: visible;
+  }
+}
+
+
 .product-option:hover {
   transform: scale(1.02);
 }
@@ -184,4 +203,9 @@ body,
 .product-image {
   height: 200px;
   margin: auto;
+}
+
+.container-mobile-scroll {
+  display: flex;
+  overflow-x: scroll;
 }
