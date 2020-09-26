@@ -205,6 +205,19 @@ body,
   margin: auto;
 }
 
+.product-image {
+  height: 200px;
+  margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .product-image {
+    height: 200px;
+    margin: auto;
+    max-width:200px !important;
+  }
+}
+
 .container-mobile-scroll {
   display: flex;
   overflow-x: scroll;
