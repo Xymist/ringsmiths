@@ -45,6 +45,7 @@ h3,
   max-width: 250px;
   height: 100%;
   overflow: visible;
+  scroll-snap-align: center;
   }
 }
 
@@ -236,4 +237,5 @@ body,
 .container-mobile-scroll {
   display: flex;
   overflow-x: scroll;
+  scroll-snap-type: x mandatory;
 }
