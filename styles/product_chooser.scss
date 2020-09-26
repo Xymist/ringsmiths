@@ -49,6 +49,12 @@ h3,
 }
 
 
+
+div.container-mobile-scroll > div:first-child
+{
+padding-left: 0px;
+}
+
 .product-option:hover {
   transform: scale(1.02);
 }
