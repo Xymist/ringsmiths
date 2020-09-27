@@ -129,6 +129,16 @@ margin-left: 0px;
   padding: 10px 0;
 }
 
+@media screen and (max-width: 600px) {
+.section-button-center {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  padding: 10px 0;
+  }
+}
+
+
 .next-button,
 .previous-button,
 .reset-button {
