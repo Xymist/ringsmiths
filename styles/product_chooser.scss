@@ -98,6 +98,13 @@ margin-left: 0px;
   text-align: center;
 }
 
+
+@media screen and (max-width: 600px) {
+  .section-button {
+    width: auto;
+  }
+}
+
 .section-button-center {
   width: 75%;
   text-align: center;
@@ -144,6 +151,13 @@ a.next-button {
   margin-top: 15px;
 }
 
+@media screen and (max-width: 600px) {
+  .section-footer {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+  }
+}
 // Sets the containing div for .product-option
 .option-set {
   display: flex;
