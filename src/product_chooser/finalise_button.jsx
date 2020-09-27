@@ -10,7 +10,7 @@ export const FinaliseButton = () => {
   return (
     <div className="section-button-center">
       <a href={selectedUrl}><button className="next-button">
-        Buy my perfect ring
+        Customise my ring
       </button>
       </a>
     </div>
