@@ -22,7 +22,7 @@ export const MobileProductResult = (props: any) => {
   return (
     <div>
       <h3 className="spec-title">Your perfect ring</h3>
-      <div className="option-set">
+      <div className="option-set-mobile">
         <div className="spec-image-final product-option">
           <img
             className="product-image"
