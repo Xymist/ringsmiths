@@ -9,11 +9,19 @@ import { ResetButton } from "../reset_button";
 
 export const MobileProductChoice = (props: any) => {
   const field = props.field;
+  const unavailableOptions = useSelector((state) => {
+    return state.productChooser.unavailable;
+  });
+
   return (
     <div>
       <h3 className="section-title">{field.title}</h3>
-        <div className="container-mobile-scroll">
-          {field.options.map((option) => {
+      <div className="container-mobile-scroll">
+        {field.options
+          .filter((option) => {
+            return !unavailableOptions[field.choice].includes(option.value);
+          })
+          .map((option) => {
             return (
               <MobileProductOption
                 choice={field.choice}
@@ -22,7 +30,7 @@ export const MobileProductChoice = (props: any) => {
               ></MobileProductOption>
             );
           })}
-        </div>
+      </div>
       <div className="section-footer">
         <PreviousButton choice={field.choice}></PreviousButton>
         <ResetButton></ResetButton>

@@ -11,23 +11,13 @@ export const ProductOption = (props: any) => {
   const selectedOptions = useSelector((state) => {
     return state.productChooser.selections;
   });
-  const unavailableOptions = useSelector((state) => {
-    return state.productChooser.unavailable;
-  });
   const dispatch = useDispatch();
   const selected = props.option.value === selectedOptions[props.choice];
-  const unavailable = unavailableOptions[props.choice].includes(
-    props.option.value
-  );
 
   return (
     <div
       id={id}
-      className={
-        (selected ? "selected-option " : "") +
-        (unavailable ? "invisible-option " : "") +
-        "product-option"
-      }
+      className={(selected ? "selected-option " : "") + "product-option"}
       style={{
         width: 100 / props.width + "%",
       }}

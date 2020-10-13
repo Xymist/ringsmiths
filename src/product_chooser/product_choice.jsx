@@ -17,22 +17,29 @@ export const ProductChoice = (props: any) => {
   const currentIdx = useSelector((state) => {
     return state.productChooser.visibleSection.idx + 1;
   });
+  const unavailableOptions = useSelector((state) => {
+    return state.productChooser.unavailable;
+  });
 
   return (
     <div>
       <h3 className="section-title">{field.title}</h3>
       <img className="progress-bar" src={progressUrl(currentIdx)}></img>
       <div className="option-set">
-        {field.options.map((option) => {
-          return (
-            <ProductOption
-              choice={field.choice}
-              option={option}
-              width={optionCount}
-              key={option.value}
-            ></ProductOption>
-          );
-        })}
+        {field.options
+          .filter((option) => {
+            return !unavailableOptions[field.choice].includes(option.value);
+          })
+          .map((option) => {
+            return (
+              <ProductOption
+                choice={field.choice}
+                option={option}
+                width={optionCount}
+                key={option.value}
+              ></ProductOption>
+            );
+          })}
       </div>
       <div className="section-footer">
         <PreviousButton choice={field.choice}></PreviousButton>
