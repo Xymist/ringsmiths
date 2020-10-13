@@ -14,7 +14,7 @@ import { MobileProductChoice } from "./mobile/mobile_product_choice";
 import { MobileProductResult } from "./mobile/mobile_product_result";
 
 const ProductChooser = (props) => {
-  const stupidTinyScreen = useMediaQuery({ query: "(max-width: 1224px)" });
+  const stupidTinyScreen = useMediaQuery({ query: "(max-width: 600px)" });
   const visibleSection = useSelector((state) => {
     return state.productChooser.visibleSection.order[
       state.productChooser.visibleSection.idx
