@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, {useRef, useEffect} from "react";
 import ReactDOM from "react-dom";
 import { MobileProductOption } from "./mobile_product_option";
 import { useSelector } from "react-redux";
@@ -12,16 +12,21 @@ export const MobileProductChoice = (props: any) => {
   const unavailableOptions = useSelector((state) => {
     return state.productChooser.unavailable;
   });
+  const visibleOptions = field.options.filter((option) => {
+    return !unavailableOptions[field.choice].includes(option.value);
+  });
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    scrollRef.current && (scrollRef.current.scrollLeft = 0)
+  });
 
   return (
     <div>
       <h3 className="section-title">{field.title}</h3>
-      <div className="container-mobile-scroll">
-        {field.options
-          .filter((option) => {
-            return !unavailableOptions[field.choice].includes(option.value);
-          })
-          .map((option) => {
+      <div className="container-mobile-scroll" ref={scrollRef}>
+        {
+          visibleOptions.map((option) => {
             return (
               <MobileProductOption
                 choice={field.choice}
@@ -29,7 +34,8 @@ export const MobileProductChoice = (props: any) => {
                 key={option.value}
               ></MobileProductOption>
             );
-          })}
+          })
+        }
       </div>
       <div className="section-footer">
         <PreviousButton choice={field.choice}></PreviousButton>
