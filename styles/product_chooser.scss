@@ -30,7 +30,9 @@ h3,
 
 }
 
-@media screen and (max-width: 1200px) {
+// Screen size fixes.
+
+@media screen and (max-width: 1460px) {
   .product-option {
     margin: 0.5em;
   }
