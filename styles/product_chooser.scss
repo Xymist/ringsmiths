@@ -38,7 +38,6 @@ h3,
   font-weight: 500;
 }
 
-
 // Screen size fixes.
 
 @media screen and (max-width: 1460px) {
@@ -98,6 +97,9 @@ h3,
   overflow: visible;
   scroll-snap-align: center;
   }
+  .product-option > h3 {
+    font-size: 22px !important;
+}
 }
 
 
